@@ -134,6 +134,11 @@ require('lualine').setup {
 }
 
 
+-- Exit terminal mode with ctrl-w hjkl buffer navigation
+vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h",{silent = true})
+vim.keymap.set('t', '<C-w>j', "<C-\\><C-n><C-w>j",{silent = true})
+vim.keymap.set('t', '<C-w>k', "<C-\\><C-n><C-w>k",{silent = true})
+vim.keymap.set('t', '<C-w>l', "<C-\\><C-n><C-w>l",{silent = true})
 
 local keymap_opts = { buffer = buffer }
 -- Code navigation and shortcuts
