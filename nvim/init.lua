@@ -139,6 +139,19 @@ vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h",{silent = true})
 vim.keymap.set('t', '<C-w>j', "<C-\\><C-n><C-w>j",{silent = true})
 vim.keymap.set('t', '<C-w>k', "<C-\\><C-n><C-w>k",{silent = true})
 vim.keymap.set('t', '<C-w>l', "<C-\\><C-n><C-w>l",{silent = true})
+--
+-- Exit terminal mode with escape
+vim.keymap.set('t', '<Esc>', "<C-\\><C-n>",{silent = true})
+
+-- Enter terminal mode immediately
+vim.api.nvim_create_autocmd({"BufWinEnter", "WinEnter"}, {
+  pattern = {"term://*"},
+  callback = function()
+    vim.cmd("startinsert")
+  end
+})
+
+
 
 local keymap_opts = { buffer = buffer }
 -- Code navigation and shortcuts
@@ -191,6 +204,11 @@ vim.keymap.set("n", "<space>fB", ":Telescope file_browser<CR>")
 require("telescope").load_extension "file_browser"
 
 
+-- Neogit setup
+vim.keymap.set('n', '<leader>g', function() require('neogit').open({ kind = 'vsplit' }) end, {})
+vim.keymap.set('n', '<leader>tg', function() vim.cmd(":Telescope git_status") end, {})
+
+
 
 
 -- have a fixed column for the diagnostics to appear in
@@ -199,5 +217,5 @@ vim.wo.signcolumn = "yes"
 -- show line numbers
 vim.wo.number = true
 -- colorscheme
-vim.cmd.colorscheme "ayu-mirage"
+vim.cmd.colorscheme "catppuccin"
 
