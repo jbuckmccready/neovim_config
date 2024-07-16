@@ -157,10 +157,10 @@ vim.keymap.set("n", "ga", vim.lsp.buf.code_action, keymap_opts)
 -- Hop setup
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
-vim.keymap.set('n', 'f', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false }) end, {remap=true})
-vim.keymap.set('n', 'F', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false }) end, {remap=true})
-vim.keymap.set('n', 't', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 }) end, {remap=true})
-vim.keymap.set('n', 'T', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 }) end, {remap=true})
+vim.keymap.set({'n','o','v'}, 'f', function() hop.hint_char2({ direction = directions.AFTER_CURSOR, current_line_only = false }) end, {remap=true})
+vim.keymap.set({'n','o','v'}, 'F', function() hop.hint_char2({ direction = directions.BEFORE_CURSOR, current_line_only = false }) end, {remap=true})
+vim.keymap.set({'n','o','v'}, 't', function() hop.hint_char2({ direction = directions.AFTER_CURSOR, current_line_only = false, hint_offset = -1 }) end, {remap=true})
+vim.keymap.set({'n','o','v'}, 'T', function() hop.hint_char2({ direction = directions.BEFORE_CURSOR, current_line_only = false, hint_offset = 1 }) end, {remap=true})
 
 -- Telescope file browser setup
 require("telescope").setup {

@@ -1,6 +1,5 @@
 return {
   'hrsh7th/nvim-cmp',
-  version = '*',
   dependencies = {
     -- cmp LSP completion
     "hrsh7th/cmp-nvim-lsp",

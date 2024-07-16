@@ -1,6 +1,5 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  version = '*',
   config = function()
     require("nvim-treesitter.configs").setup {
       highlight = {
