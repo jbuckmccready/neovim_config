@@ -144,12 +144,32 @@ vim.keymap.set('t', '<C-w>l', "<C-\\><C-n><C-w>l",{silent = true})
 vim.keymap.set('t', '<Esc>', "<C-\\><C-n>",{silent = true})
 
 -- Enter terminal mode immediately
-vim.api.nvim_create_autocmd({"BufWinEnter", "WinEnter"}, {
-  pattern = {"term://*"},
-  callback = function()
-    vim.cmd("startinsert")
-  end
-})
+-- not sure if I like it, disabled for now
+-- vim.api.nvim_create_autocmd({"BufWinEnter", "WinEnter"}, {
+--   pattern = {"term://*"},
+--   callback = function()
+--     vim.cmd("startinsert")
+--   end
+-- })
+
+-- Tab setup
+-- navigation
+vim.keymap.set('n', '<leader>h', "gT",{silent = true})
+vim.keymap.set('n', '<leader>l', "gt",{silent = true})
+vim.keymap.set('n', '<leader>1', "1gt",{silent = true})
+vim.keymap.set('n', '<leader>2', "2gt",{silent = true})
+vim.keymap.set('n', '<leader>3', "3gt",{silent = true})
+vim.keymap.set('n', '<leader>4', "4gt",{silent = true})
+vim.keymap.set('n', '<leader>5', "5gt",{silent = true})
+vim.keymap.set('n', '<leader>6', "6gt",{silent = true})
+vim.keymap.set('n', '<leader>7', "7gt",{silent = true})
+vim.keymap.set('n', '<leader>8', "8gt",{silent = true})
+vim.keymap.set('n', '<leader>9', "9gt",{silent = true})
+vim.keymap.set('n', '<leader>9', "9gt",{silent = true})
+-- creation
+vim.keymap.set('n', '<leader>n', function() vim.cmd(":tab split") end,{silent = true})
+
+
 
 
 
