@@ -272,9 +272,6 @@ vim.keymap.set({ 'n', 'o', 'v' }, 'S',
 	{ remap = true })
 
 
--- Neogit setup
-vim.keymap.set('n', '<leader>g', function() require('neogit').open({}) end, {})
-
 -- Neotree setup
 vim.keymap.set("n", "<leader>t", ":Neotree<CR>")
 
