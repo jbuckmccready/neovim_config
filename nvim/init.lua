@@ -99,9 +99,14 @@ vim.api.nvim_set_option_value('updatetime', 10, {})
 
 
 -- Rust specific setup (note: rustaceanvim uses nvim lsp under the hood)
+vim.keymap.set('n', '<leader>od', function() vim.cmd.RustLsp('openDocs') end, { silent = true })
+vim.keymap.set("n", "<leader>d", ":Gitsigns preview_hunk<CR>")
+
 vim.g.rustaceanvim = {
 	-- Plugin configuration
 	tools = {
+		-- Don't run clippy on save
+		enable_clippy = false,
 	},
 	-- LSP configuration
 	server = {
@@ -242,7 +247,7 @@ local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 
 -- Telescope file browser setup
-vim.keymap.set("n", "<space>b", ":Telescope file_browser<CR>")
+vim.keymap.set("n", "<leader>b", ":Telescope file_browser<CR>")
 require("telescope").load_extension "file_browser"
 -- Telescope fzf extension for performance on fuzzy searching
 require('telescope').load_extension('fzf')
@@ -271,7 +276,7 @@ vim.keymap.set({ 'n', 'o', 'v' }, 'S',
 vim.keymap.set('n', '<leader>g', function() require('neogit').open({}) end, {})
 
 -- Neotree setup
-vim.keymap.set("n", "<space>t", ":Neotree<CR>")
+vim.keymap.set("n", "<leader>t", ":Neotree<CR>")
 
 
 -- have a fixed column for the diagnostics to appear in
