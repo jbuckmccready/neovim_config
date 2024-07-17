@@ -100,7 +100,7 @@ vim.api.nvim_set_option_value('updatetime', 10, {})
 
 -- Rust specific setup (note: rustaceanvim uses nvim lsp under the hood)
 vim.keymap.set('n', '<leader>od', function() vim.cmd.RustLsp('openDocs') end, { silent = true })
-vim.keymap.set("n", "<leader>d", ":Gitsigns preview_hunk<CR>")
+vim.keymap.set("n", "<leader>d", ":Gitsigns preview_hunk<CR>", { silent = true })
 
 vim.g.rustaceanvim = {
 	-- Plugin configuration
@@ -273,7 +273,7 @@ vim.keymap.set({ 'n', 'o', 'v' }, 'S',
 
 
 -- Neotree setup
-vim.keymap.set("n", "<leader>t", ":Neotree<CR>")
+vim.keymap.set("n", "<leader>t", ":Neotree toggle<CR>", { silent = true })
 
 
 -- have a fixed column for the diagnostics to appear in
