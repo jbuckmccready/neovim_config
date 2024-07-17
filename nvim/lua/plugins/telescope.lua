@@ -6,6 +6,7 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
 
 
+vim.keymap.set("n", "gr", builtin.lsp_references, {})
 vim.keymap.set('n', '<leader>fs', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>fS', builtin.lsp_workspace_symbols, {})
 vim.keymap.set('n', '<leader>fd', builtin.diagnostics, {})
