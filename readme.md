@@ -11,6 +11,7 @@ This is experimental/learning setup for neovim just hacked together.
 
 ### External/manual opt-in notes
 
+- nerd font for icons can get from here: https://www.nerdfonts.com/font-downloads (currently using Iosevka)
 - rust analyzer for rust lsp (`rustup component add rust-analyzer` or can probably install via `mason` plugin)
 - `:LspInstall gopls` for go lsp, `TSInstall go` for go syntax highlighting
 - `:LspInstall lua_ls` for lua lsp, `TSInstall lua` not required currently since it's in `ensure_installed` in `treesitter.lua`
