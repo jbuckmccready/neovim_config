@@ -11,15 +11,16 @@ cmp.setup({
 		end,
 	},
 	mapping = {
-		["<C-p>"] = cmp.mapping.select_prev_item(),
-		["<C-n>"] = cmp.mapping.select_next_item(),
-		-- Add tab support
-		["<S-Tab>"] = cmp.mapping.select_prev_item(),
-		["<Tab>"] = cmp.mapping.select_next_item(),
+		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
+		["<Tab>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Insert,
+			select = true,
+		}),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true,
@@ -39,6 +40,17 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 })
+--
+--Set completeopt to have a better completion experience
+-- :help completeopt
+-- menuone: popup even when there's only one match
+-- noinsert: Do not insert text until a selection is made
+-- noselect: Do not select, force to select one from the menu
+-- shortness: avoid showing extra messages when using completion
+-- updatetime: set updatetime for CursorHold
+vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
+vim.opt.shortmess = vim.opt.shortmess + { c = true }
+vim.api.nvim_set_option_value('updatetime', 10, {})
 
 -- using mason for lsp setup
 require("mason").setup()
@@ -86,21 +98,13 @@ require("lspconfig").lua_ls.setup {
 	}
 }
 
---Set completeopt to have a better completion experience
--- :help completeopt
--- menuone: popup even when there's only one match
--- noinsert: Do not insert text until a selection is made
--- noselect: Do not select, force to select one from the menu
--- shortness: avoid showing extra messages when using completion
--- updatetime: set updatetime for CursorHold
-vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
-vim.opt.shortmess = vim.opt.shortmess + { c = true }
-vim.api.nvim_set_option_value('updatetime', 10, {})
-
+-- which-key for key mappings
+local wk = require("which-key")
 
 -- Rust specific setup (note: rustaceanvim uses nvim lsp under the hood)
-vim.keymap.set('n', '<leader>od', function() vim.cmd.RustLsp('openDocs') end, { silent = true })
-vim.keymap.set("n", "<leader>d", ":Gitsigns preview_hunk<CR>", { silent = true })
+wk.add({
+	{ "<leader>od", function() vim.cmd.RustLsp('openDocs') end, desc = "Open Rust Doc", mode = "n" },
+})
 
 vim.g.rustaceanvim = {
 	-- Plugin configuration
@@ -186,8 +190,34 @@ require('lualine').setup {
 	extensions = {}
 }
 
+-- Telescope
+-- Telescope fzf extension for performance on fuzzy searching
+require('telescope').load_extension('fzf')
 
+local tele_builtin = require('telescope.builtin')
+wk.add({
+	{ "<leader>f",   group = "Telescope" },
+	{ "<leader>ff",  tele_builtin.find_files,            desc = "Find File",               mode = "n" },
+	{ "<leader>fg",  tele_builtin.live_grep,             desc = "Live Grep",               mode = "n" },
+	{ "<leader>fb",  tele_builtin.buffers,               desc = "Find Buffer",             mode = "n" },
+	{ "<leader>fh",  tele_builtin.help_tags,             desc = "Find Help",               mode = "n" },
+	{ "<leader>fw",  tele_builtin.grep_string,           desc = "Grep Word",               mode = "n" },
+	{ "<leader>fr",  tele_builtin.lsp_references,        desc = "Find References",         mode = "n" },
+	{ "<leader>fs",  tele_builtin.lsp_document_symbols,  desc = "Document Symbols",        mode = "n" },
+	{ "<leader>fS",  tele_builtin.lsp_workspace_symbols, desc = "Workspace Symbols",       mode = "n" },
+	{ "<leader>fq",  tele_builtin.diagnostics,           desc = "LSP Diagnostics",         mode = "n" },
+	{ "<leader>f:",  tele_builtin.command_history,       desc = "Command History",         mode = "n" },
+	{ "<leader>f/",  tele_builtin.search_history,        desc = "Search History",          mode = "n" },
+	{ "<leader>ft",  tele_builtin.lsp_type_definitions,  desc = "Goto Type Definition(s)", mode = "n" },
+	{ "<leader>fd",  tele_builtin.lsp_definitions,       desc = "Goto Definition(s)",      mode = "n" },
+	{ "<leader>fD",  tele_builtin.lsp_implementations,   desc = "Goto Implementation(s)",  mode = "n" },
+	{ "<leader>f\"", tele_builtin.registers,             desc = "Registers",               mode = "n" },
+	{ "<leader>f'",  tele_builtin.marks,                 desc = "Marks",                   mode = "n" },
+})
+
+-- Terminal
 -- Exit terminal mode with ctrl-w hjkl buffer navigation
+-- TODO: which-key organization
 vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
 vim.keymap.set('t', '<C-w>j', "<C-\\><C-n><C-w>j", { silent = true })
 vim.keymap.set('t', '<C-w>k', "<C-\\><C-n><C-w>k", { silent = true })
@@ -207,6 +237,7 @@ vim.keymap.set('t', '<Esc>', "<C-\\><C-n>", { silent = true })
 
 -- Tab setup
 -- navigation
+-- TODO: which-key organization
 vim.keymap.set('n', '<leader>h', "gT", { silent = true })
 vim.keymap.set('n', '<leader>l', "gt", { silent = true })
 vim.keymap.set('n', '<leader>1', "1gt", { silent = true })
@@ -223,57 +254,41 @@ vim.keymap.set('n', '<leader>9', "9gt", { silent = true })
 vim.keymap.set('n', '<leader>n', function() vim.cmd(":tab split") end, {})
 
 
--- Code navigation and shortcuts
-vim.keymap.set("n", "<c-]>", vim.lsp.buf.definition, {})
-vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-vim.keymap.set("n", "gD", vim.lsp.buf.implementation, {})
-vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, {})
-vim.keymap.set("n", "1gD", vim.lsp.buf.type_definition, {})
--- using telescope
--- vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
-vim.keymap.set("n", "g0", vim.lsp.buf.document_symbol, {})
-vim.keymap.set("n", "gW", vim.lsp.buf.workspace_symbol, {})
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
-
--- lsp rename
-vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, {})
--- lsp code action
-vim.keymap.set("n", "ga", vim.lsp.buf.code_action, {})
--- RustLsp codeAction creates grouping if available and different interface if desired
--- vim.keymap.set("n", "ga", function() vim.cmd.RustLsp('codeAction') end, keymap_opts)
+-- Misc. LSP
+wk.add({
+	{ "K",    vim.lsp.buf.hover,       desc = "Hover Text",    mode = "n" },
+	{ "<F2>", vim.lsp.buf.rename,      desc = "Rename Symbol", mode = "n" },
+	-- TODO: use better code action interface/plugin
+	{ "ga",   vim.lsp.buf.code_action, desc = "Code Action",   mode = "n" },
+})
 
 -- Hop setup
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 
--- Telescope file browser setup
-vim.keymap.set("n", "<leader>b", ":Telescope file_browser<CR>")
-require("telescope").load_extension "file_browser"
--- Telescope fzf extension for performance on fuzzy searching
-require('telescope').load_extension('fzf')
-
-vim.keymap.set({ 'n', 'o', 'v' }, 'f',
-	function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end,
-	{ remap = true })
-vim.keymap.set({ 'n', 'o', 'v' }, 'F',
-	function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end,
-	{ remap = true })
-vim.keymap.set({ 'n', 'o', 'v' }, 't',
-	function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }) end,
-	{ remap = true })
-vim.keymap.set({ 'n', 'o', 'v' }, 'T',
-	function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 }) end,
-	{ remap = true })
-vim.keymap.set({ 'n', 'o', 'v' }, 's',
-	function() hop.hint_words({ direction = directions.AFTER_CURSOR, current_line_only = false }) end,
-	{ remap = true })
-vim.keymap.set({ 'n', 'o', 'v' }, 'S',
-	function() hop.hint_words({ direction = directions.BEFORE_CURSOR, current_line_only = false }) end,
-	{ remap = true })
-
+wk.add({
+	{ "f", function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end,                    desc = "Hop-f",           mode = { "n", "o", "v" } },
+	{ "F", function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end,                   desc = "Hop-F",           mode = { "n", "o", "v" } },
+	{ "t", function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }) end,  desc = "Hop-t",           mode = { "n", "o", "v" } },
+	{ "T", function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = -1 }) end, desc = "Hop-t",           mode = { "n", "o", "v" } },
+	{ "s", function() hop.hint_words({ direction = directions.AFTER_CURSOR, current_line_only = false }) end,                   desc = "Hop Word After",  mode = { "n", "o", "v" } },
+	{ "S", function() hop.hint_words({ direction = directions.BEFORE_CURSOR, current_line_only = false }) end,                  desc = "Hop Word Before", mode = { "n", "o", "v" } },
+})
 
 -- Neotree setup
-vim.keymap.set("n", "<leader>t", ":Neotree toggle<CR>", { silent = true })
+wk.add({
+	{ "<leader>t", "<cmd>Neotree toggle<CR>", desc = "Toggle File Tree", mode = "n" },
+})
+
+-- Git setup
+wk.add({
+	{ "<leader>g",  group = "Git" },
+	{ "<leader>gg", "<cmd>Git<CR>",                   desc = "Status",            mode = "n" },
+	{ "<leader>gd", "<cmd>Gdiffsplit<CR>",            desc = "Diff Current File", mode = "n" },
+	{ "<leader>gs", "<cmd>Gitsigns preview_hunk<CR>", desc = "Hunk Diff",         mode = "n" },
+	{ "<leader>gn", "<cmd>Gitsigns next_hunk<CR>",    desc = "Next Hunk",         mode = "n" },
+	{ "<leader>gl", "<cmd>Git log --oneline<CR>",     desc = "Commit Log",        mode = "n" },
+})
 
 
 -- have a fixed column for the diagnostics to appear in
