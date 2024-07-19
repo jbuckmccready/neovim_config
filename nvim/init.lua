@@ -210,21 +210,24 @@ wk.add({
 	{ "<leader>f/",  tele_builtin.search_history,        desc = "Search History",          mode = "n" },
 	{ "<leader>ft",  tele_builtin.lsp_type_definitions,  desc = "Goto Type Definition(s)", mode = "n" },
 	{ "<leader>fd",  tele_builtin.lsp_definitions,       desc = "Goto Definition(s)",      mode = "n" },
-	{ "<leader>fD",  tele_builtin.lsp_implementations,   desc = "Goto Implementation(s)",  mode = "n" },
+	{ "<leader>fi",  tele_builtin.lsp_implementations,   desc = "Goto Implementation(s)",  mode = "n" },
 	{ "<leader>f\"", tele_builtin.registers,             desc = "Registers",               mode = "n" },
 	{ "<leader>f'",  tele_builtin.marks,                 desc = "Marks",                   mode = "n" },
 })
 
 -- Terminal
--- Exit terminal mode with ctrl-w hjkl buffer navigation
--- TODO: which-key organization
-vim.keymap.set('t', '<C-w>h', "<C-\\><C-n><C-w>h", { silent = true })
-vim.keymap.set('t', '<C-w>j', "<C-\\><C-n><C-w>j", { silent = true })
-vim.keymap.set('t', '<C-w>k', "<C-\\><C-n><C-w>k", { silent = true })
-vim.keymap.set('t', '<C-w>l', "<C-\\><C-n><C-w>l", { silent = true })
+wk.add({
+	-- Exit terminal mode with ctrl-w hjkl buffer navigation
+	{ "<C-w>h", "<C-\\><C-n><C-w>h", desc = "Go to the left window",  mode = { "t" } },
+	{ "<C-w>j", "<C-\\><C-n><C-w>j", desc = "Go to the down window",  mode = { "t" } },
+	{ "<C-w>k", "<C-\\><C-n><C-w>k", desc = "Go to the up window",    mode = { "t" } },
+	{ "<C-w>l", "<C-\\><C-n><C-w>l", desc = "Go to the right window", mode = { "t" } },
+	-- Exit terminal mode with escape
+	{ "<Esc>",  "<C-\\><C-n>",       desc = "Exit terminal mode",     mode = { "t" } },
+	-- Close window while in terminal mode
+	{ "<C-w>q", "<C-\\><C-n><C-w>q", desc = "Quit a window",          mode = { "t" } },
+})
 --
--- Exit terminal mode with escape
-vim.keymap.set('t', '<Esc>', "<C-\\><C-n>", { silent = true })
 
 -- Enter terminal mode immediately
 -- not sure if I like it, disabled for now
@@ -236,30 +239,25 @@ vim.keymap.set('t', '<Esc>', "<C-\\><C-n>", { silent = true })
 -- })
 
 -- Tab setup
--- navigation
--- TODO: which-key organization
-vim.keymap.set('n', '<leader>h', "gT", { silent = true })
-vim.keymap.set('n', '<leader>l', "gt", { silent = true })
-vim.keymap.set('n', '<leader>1', "1gt", { silent = true })
-vim.keymap.set('n', '<leader>2', "2gt", { silent = true })
-vim.keymap.set('n', '<leader>3', "3gt", { silent = true })
-vim.keymap.set('n', '<leader>4', "4gt", { silent = true })
-vim.keymap.set('n', '<leader>5', "5gt", { silent = true })
-vim.keymap.set('n', '<leader>6', "6gt", { silent = true })
-vim.keymap.set('n', '<leader>7', "7gt", { silent = true })
-vim.keymap.set('n', '<leader>8', "8gt", { silent = true })
-vim.keymap.set('n', '<leader>9', "9gt", { silent = true })
-vim.keymap.set('n', '<leader>9', "9gt", { silent = true })
--- creation
-vim.keymap.set('n', '<leader>n', function() vim.cmd(":tab split") end, {})
+wk.add({
+	{ "<leader>h", "<cmd>tabprevious<CR>", desc = "Next Tab",     mode = { "n", "o", "v" } },
+	{ "<leader>l", "<cmd>tabnext<CR>",     desc = "Previous Tab", mode = { "n", "o", "v" } },
+	{ "<leader>H", "<cmd>tabfirst<CR>",    desc = "First Tab",    mode = { "n", "o", "v" } },
+	{ "<leader>L", "<cmd>tablast<CR>",     desc = "Last Tab",     mode = { "n", "o", "v" } },
+	{ "<leader>1", "<cmd>1tabnext<CR>",    desc = "Tab 1",        mode = { "n", "o", "v" } },
+	{ "<leader>2", "<cmd>2tabnext<CR>",    desc = "Tab 2",        mode = { "n", "o", "v" } },
+	{ "<leader>3", "<cmd>3tabnext<CR>",    desc = "Tab 3",        mode = { "n", "o", "v" } },
+	{ "<leader>4", "<cmd>4tabnext<CR>",    desc = "Tab 4",        mode = { "n", "o", "v" } },
+	{ "<leader>5", "<cmd>5tabnext<CR>",    desc = "Tab 5",        mode = { "n", "o", "v" } },
+	{ "<leader>n", "<cmd>tab split<CR>",   desc = "New Tab",      mode = { "n", "o", "v" } },
+})
 
 
 -- Misc. LSP
 wk.add({
-	{ "K",    vim.lsp.buf.hover,       desc = "Hover Text",    mode = "n" },
-	{ "<F2>", vim.lsp.buf.rename,      desc = "Rename Symbol", mode = "n" },
-	-- TODO: use better code action interface/plugin
-	{ "ga",   vim.lsp.buf.code_action, desc = "Code Action",   mode = "n" },
+	{ "K",    vim.lsp.buf.hover,                       desc = "Hover Text",    mode = "n" },
+	{ "<F2>", vim.lsp.buf.rename,                      desc = "Rename Symbol", mode = "n" },
+	{ "ga",   require('actions-preview').code_actions, desc = "Code Action",   mode = { "n", "v" } },
 })
 
 -- Hop setup
@@ -287,6 +285,7 @@ wk.add({
 	{ "<leader>gd", "<cmd>Gdiffsplit<CR>",            desc = "Diff Current File", mode = "n" },
 	{ "<leader>gs", "<cmd>Gitsigns preview_hunk<CR>", desc = "Hunk Diff",         mode = "n" },
 	{ "<leader>gn", "<cmd>Gitsigns next_hunk<CR>",    desc = "Next Hunk",         mode = "n" },
+	{ "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>",    desc = "Previous Hunk",     mode = "n" },
 	{ "<leader>gl", "<cmd>Git log --oneline<CR>",     desc = "Commit Log",        mode = "n" },
 })
 
