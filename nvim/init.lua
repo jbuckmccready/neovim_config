@@ -240,16 +240,17 @@ wk.add({
 
 -- Tab setup
 wk.add({
-	{ "<leader>h", "<cmd>tabprevious<CR>", desc = "Next Tab",     mode = { "n", "o", "v" } },
-	{ "<leader>l", "<cmd>tabnext<CR>",     desc = "Previous Tab", mode = { "n", "o", "v" } },
-	{ "<leader>H", "<cmd>tabfirst<CR>",    desc = "First Tab",    mode = { "n", "o", "v" } },
-	{ "<leader>L", "<cmd>tablast<CR>",     desc = "Last Tab",     mode = { "n", "o", "v" } },
-	{ "<leader>1", "<cmd>1tabnext<CR>",    desc = "Tab 1",        mode = { "n", "o", "v" } },
-	{ "<leader>2", "<cmd>2tabnext<CR>",    desc = "Tab 2",        mode = { "n", "o", "v" } },
-	{ "<leader>3", "<cmd>3tabnext<CR>",    desc = "Tab 3",        mode = { "n", "o", "v" } },
-	{ "<leader>4", "<cmd>4tabnext<CR>",    desc = "Tab 4",        mode = { "n", "o", "v" } },
-	{ "<leader>5", "<cmd>5tabnext<CR>",    desc = "Tab 5",        mode = { "n", "o", "v" } },
-	{ "<leader>n", "<cmd>tab split<CR>",   desc = "New Tab",      mode = { "n", "o", "v" } },
+	{ "<leader>h", "<cmd>tabprevious<CR>", desc = "Next Tab",     mode = "n" },
+	{ "<leader>l", "<cmd>tabnext<CR>",     desc = "Previous Tab", mode = "n" },
+	{ "<leader>H", "<cmd>tabfirst<CR>",    desc = "First Tab",    mode = "n" },
+	{ "<leader>L", "<cmd>tablast<CR>",     desc = "Last Tab",     mode = "n" },
+	{ "<leader>1", "<cmd>1tabnext<CR>",    desc = "Tab 1",        mode = "n" },
+	{ "<leader>2", "<cmd>2tabnext<CR>",    desc = "Tab 2",        mode = "n" },
+	{ "<leader>3", "<cmd>3tabnext<CR>",    desc = "Tab 3",        mode = "n" },
+	{ "<leader>4", "<cmd>4tabnext<CR>",    desc = "Tab 4",        mode = "n" },
+	{ "<leader>5", "<cmd>5tabnext<CR>",    desc = "Tab 5",        mode = "n" },
+	{ "<leader>n", "<cmd>tab split<CR>",   desc = "New Tab",      mode = "n" },
+	{ "<leader>c", "<cmd>tabc<CR>",        desc = "Close Tab",    mode = "n" },
 })
 
 
@@ -265,12 +266,14 @@ local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 
 wk.add({
-	{ "f", function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end,                    desc = "Hop-f",           mode = { "n", "o", "v" } },
-	{ "F", function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end,                   desc = "Hop-F",           mode = { "n", "o", "v" } },
-	{ "t", function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }) end,  desc = "Hop-t",           mode = { "n", "o", "v" } },
-	{ "T", function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = -1 }) end, desc = "Hop-t",           mode = { "n", "o", "v" } },
-	{ "s", function() hop.hint_words({ direction = directions.AFTER_CURSOR, current_line_only = false }) end,                   desc = "Hop Word After",  mode = { "n", "o", "v" } },
-	{ "S", function() hop.hint_words({ direction = directions.BEFORE_CURSOR, current_line_only = false }) end,                  desc = "Hop Word Before", mode = { "n", "o", "v" } },
+	-- mimic the usual f, F, t, T mappings with hop variants
+	{ "f", function() hop.hint_char1({ direction = directions.AFTER_CURSOR }) end,                   desc = "Hop 1Char After",    mode = { "n", "o", "v" } },
+	{ "F", function() hop.hint_char1({ direction = directions.BEFORE_CURSOR }) end,                  desc = "Hop 1Char Before",   mode = { "n", "o", "v" } },
+	{ "t", function() hop.hint_char1({ direction = directions.AFTER_CURSOR, hint_offset = -1 }) end, desc = "Hop 1Char After-1",  mode = { "n", "o", "v" } },
+	{ "T", function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, hint_offset = 1 }) end, desc = "Hop 1Char Before-1", mode = { "n", "o", "v" } },
+	-- hop to words
+	{ "s", function() hop.hint_words({ direction = directions.AFTER_CURSOR }) end,                   desc = "Hop Word After",     mode = { "n", "o", "v" } },
+	{ "S", function() hop.hint_words({ direction = directions.BEFORE_CURSOR }) end,                  desc = "Hop Word Before",    mode = { "n", "o", "v" } },
 })
 
 -- Neotree setup
