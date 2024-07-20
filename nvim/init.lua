@@ -254,6 +254,7 @@ wk.add({
 	{ "<leader>fc",  tele_builtin.git_bcommits,              desc = "Buffer Git Commits",      mode = "n" },
 	{ "<leader>fC",  tele_builtin.git_commits,               desc = "Git Commits",             mode = "n" },
 	{ "<leader>fe",  tele_builtin.git_status,                desc = "Git Status",              mode = "n" },
+	{ "<leader>fl",  tele_builtin.colorscheme,               desc = "Colorscheme",             mode = "n" },
 })
 
 -- Terminal
@@ -278,6 +279,22 @@ wk.add({
 --     vim.cmd("startinsert")
 --   end
 -- })
+
+
+-- Window setup
+wk.add({
+	{
+		"<leader>w",
+		function()
+			wk.show({
+				keys = "<c-w>",
+				loop = true, -- this will keep the popup open until you hit <esc>
+			})
+		end,
+		mode = "n"
+	},
+})
+
 
 -- Tab setup
 wk.add({
