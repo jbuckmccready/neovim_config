@@ -194,27 +194,66 @@ require('lualine').setup {
 -- Telescope
 -- Telescope fzf extension for performance on fuzzy searching
 require('telescope').load_extension('fzf')
+local actions = require("telescope.actions")
+local copy_tele_selection = function()
+	local entry = require("telescope.actions.state").get_selected_entry()
+	-- honor clipboard settings
+	local cb_opts = vim.opt.clipboard:get()
+	if vim.tbl_contains(cb_opts, "unnamed") then vim.fn.setreg("*", entry.path) end
+	if vim.tbl_contains(cb_opts, "unnamedplus") then vim.fn.setreg("+", entry.path) end
+	vim.fn.setreg("", entry.path)
+end
+require("telescope").setup {
+	defaults = {
+		mappings = {
+			i = {
+				["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+				["<C-y>"] = copy_tele_selection,
+			},
+			n = {
+				["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+				["<C-y>"] = copy_tele_selection,
+			},
+		},
+	},
+	pickers = {
+		buffers = {
+			mappings = {
+				i = {
+					["<c-b>"] = actions.delete_buffer + actions.move_to_top,
+				},
+				n = {
+					["<c-b>"] = actions.delete_buffer + actions.move_to_top,
+				}
+			}
+		}
+	}
+}
 
 local tele_builtin = require('telescope.builtin')
 wk.add({
 	{ "<leader>f",   group = "Telescope" },
-	{ "<leader>ff",  tele_builtin.find_files,            desc = "Find File",               mode = "n" },
-	{ "<leader>fg",  tele_builtin.live_grep,             desc = "Live Grep",               mode = "n" },
-	{ "<leader>fb",  tele_builtin.buffers,               desc = "Find Buffer",             mode = "n" },
-	{ "<leader>fh",  tele_builtin.help_tags,             desc = "Find Help",               mode = "n" },
-	{ "<leader>fw",  tele_builtin.grep_string,           desc = "Grep Word",               mode = "n" },
-	{ "<leader>fr",  tele_builtin.lsp_references,        desc = "Find References",         mode = "n" },
-	{ "<leader>fs",  tele_builtin.lsp_document_symbols,  desc = "Document Symbols",        mode = "n" },
-	{ "<leader>fS",  tele_builtin.lsp_workspace_symbols, desc = "Workspace Symbols",       mode = "n" },
-	{ "<leader>fq",  tele_builtin.diagnostics,           desc = "LSP Diagnostics",         mode = "n" },
-	{ "<leader>f:",  tele_builtin.command_history,       desc = "Command History",         mode = "n" },
-	{ "<leader>f/",  tele_builtin.search_history,        desc = "Search History",          mode = "n" },
-	{ "<leader>ft",  tele_builtin.lsp_type_definitions,  desc = "Goto Type Definition(s)", mode = "n" },
-	{ "<leader>fd",  tele_builtin.lsp_definitions,       desc = "Goto Definition(s)",      mode = "n" },
-	{ "<leader>fi",  tele_builtin.lsp_implementations,   desc = "Goto Implementation(s)",  mode = "n" },
-	{ "<leader>f\"", tele_builtin.registers,             desc = "Registers",               mode = "n" },
-	{ "<leader>f'",  tele_builtin.marks,                 desc = "Marks",                   mode = "n" },
-	{ "<leader>fG",  tele_builtin.git_branches,          desc = "Git Branches",            mode = "n" },
+	{ "<leader>ff",  tele_builtin.find_files,                desc = "Find File",               mode = "n" },
+	{ "<leader>fg",  tele_builtin.live_grep,                 desc = "Live Grep",               mode = "n" },
+	{ "<leader>fb",  tele_builtin.buffers,                   desc = "Find Buffer",             mode = "n" },
+	{ "<leader>fz",  tele_builtin.current_buffer_fuzzy_find, desc = "Buffer Fuzzy Find",       mode = "n" },
+	{ "<leader>fh",  tele_builtin.help_tags,                 desc = "Find Help",               mode = "n" },
+	{ "<leader>fw",  tele_builtin.grep_string,               desc = "Grep Word Under Cursor",  mode = "n" },
+	{ "<leader>fr",  tele_builtin.lsp_references,            desc = "Find References",         mode = "n" },
+	{ "<leader>fs",  tele_builtin.lsp_document_symbols,      desc = "Document Symbols",        mode = "n" },
+	{ "<leader>fS",  tele_builtin.lsp_workspace_symbols,     desc = "Workspace Symbols",       mode = "n" },
+	{ "<leader>fq",  tele_builtin.diagnostics,               desc = "LSP Diagnostics",         mode = "n" },
+	{ "<leader>f:",  tele_builtin.command_history,           desc = "Command History",         mode = "n" },
+	{ "<leader>f/",  tele_builtin.search_history,            desc = "Search History",          mode = "n" },
+	{ "<leader>ft",  tele_builtin.lsp_type_definitions,      desc = "Goto Type Definition(s)", mode = "n" },
+	{ "<leader>fd",  tele_builtin.lsp_definitions,           desc = "Goto Definition(s)",      mode = "n" },
+	{ "<leader>fi",  tele_builtin.lsp_implementations,       desc = "Goto Implementation(s)",  mode = "n" },
+	{ "<leader>f\"", tele_builtin.registers,                 desc = "Registers",               mode = "n" },
+	{ "<leader>f'",  tele_builtin.marks,                     desc = "Marks",                   mode = "n" },
+	{ "<leader>fG",  tele_builtin.git_branches,              desc = "Git Branches",            mode = "n" },
+	{ "<leader>fc",  tele_builtin.git_bcommits,              desc = "Buffer Git Commits",      mode = "n" },
+	{ "<leader>fC",  tele_builtin.git_commits,               desc = "Git Commits",             mode = "n" },
+	{ "<leader>fe",  tele_builtin.git_status,                desc = "Git Status",              mode = "n" },
 })
 
 -- Terminal
