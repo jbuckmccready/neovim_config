@@ -1,4 +1,5 @@
 require('config.lazy')
+require('config.patches')
 
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
@@ -213,6 +214,7 @@ wk.add({
 	{ "<leader>fi",  tele_builtin.lsp_implementations,   desc = "Goto Implementation(s)",  mode = "n" },
 	{ "<leader>f\"", tele_builtin.registers,             desc = "Registers",               mode = "n" },
 	{ "<leader>f'",  tele_builtin.marks,                 desc = "Marks",                   mode = "n" },
+	{ "<leader>fG",  tele_builtin.git_branches,          desc = "Git Branches",            mode = "n" },
 })
 
 -- Terminal
