@@ -341,4 +341,4 @@ vim.wo.signcolumn = "yes"
 -- show line numbers
 vim.wo.number = true
 -- colorscheme
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "catppuccin-mocha"

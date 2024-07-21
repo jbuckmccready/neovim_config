@@ -1,0 +1,20 @@
+live_config_reload = true
+
+[font]
+size = 14.0
+
+[font.bold]
+family = "ZedMono Nerd Font"
+style = "Bold"
+
+[font.bold_italic]
+family = "ZedMono Nerd Font"
+style = "Bold Italic"
+
+[font.italic]
+family = "ZedMono Nerd Font"
+style = "Light Italic"
+
+[font.normal]
+family = "ZedMono Nerd Font"
+style = "Regular"
