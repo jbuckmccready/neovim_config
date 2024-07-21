@@ -37,6 +37,10 @@ miniclue.setup({
 		-- `z` key
 		{ mode = 'n', keys = 'z' },
 		{ mode = 'x', keys = 'z' },
+
+		-- `s` key for surround
+		{ mode = 'n', keys = 's' },
+		{ mode = 'x', keys = 's' },
 	},
 
 	clues = {
@@ -54,11 +58,11 @@ miniclue.setup({
 		-- Hop
 		{ mode = 'n', keys = '<leader>s',  desc = 'Hop' },
 		{ mode = 'o', keys = '<leader>s',  desc = 'Hop' },
-		{ mode = 'v', keys = '<leader>s',  desc = 'Hop' },
+		{ mode = 'x', keys = '<leader>s',  desc = 'Hop' },
 
 		-- Code Editing
 		{ mode = 'n', keys = '<leader>e',  desc = 'Code Editing' },
-		{ mode = 'v', keys = '<leader>e',  desc = 'Code Editing' },
+		{ mode = 'x', keys = '<leader>e',  desc = 'Code Editing' },
 
 		-- Git
 		{ mode = 'n', keys = '<leader>g',  desc = 'Git' },
@@ -128,7 +132,7 @@ vim.keymap.set({ "n" }, "<leader>c", "<cmd>tabc<CR>", { desc = "Close Tab" })
 
 -- Code editing
 vim.keymap.set({ "n" }, "<leader>er", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-vim.keymap.set({ "n", "v" }, "<leader>ea", require('actions-preview').code_actions, { desc = "Code Action" })
+vim.keymap.set({ "n", "x" }, "<leader>ea", require('actions-preview').code_actions, { desc = "Code Action" })
 
 -- Misc. LSP
 vim.keymap.set({ "n" }, "K", vim.lsp.buf.hover, { desc = "Hover Text" })
@@ -138,30 +142,30 @@ local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 
 -- mimic the usual f, F, t, T mappings with hop variants
-vim.keymap.set({ "n", "o", "v" }, "f", function() hop.hint_char1({ direction = directions.AFTER_CURSOR }) end,
+vim.keymap.set({ "n", "o", "x" }, "f", function() hop.hint_char1({ direction = directions.AFTER_CURSOR }) end,
 	{ desc = "Hop 1Char After" })
-vim.keymap.set({ "n", "o", "v" }, "F", function() hop.hint_char1({ direction = directions.BEFORE_CURSOR }) end,
+vim.keymap.set({ "n", "o", "x" }, "F", function() hop.hint_char1({ direction = directions.BEFORE_CURSOR }) end,
 	{ desc = "Hop 1Char Before" })
-vim.keymap.set({ "n", "o", "v" }, "t",
+vim.keymap.set({ "n", "o", "x" }, "t",
 	function() hop.hint_char1({ direction = directions.AFTER_CURSOR, hint_offset = -1 }) end,
 	{ desc = "Hop 1Char After-1" })
-vim.keymap.set({ "n", "o", "v" }, "T",
+vim.keymap.set({ "n", "o", "x" }, "T",
 	function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, hint_offset = 1 }) end,
 	{ desc = "Hop 1Char Before-1" })
 -- hop to words
-vim.keymap.set({ "n", "o", "v" }, "s", function() hop.hint_words({ direction = directions.AFTER_CURSOR }) end,
-	{ desc = "Hop Word After" })
-vim.keymap.set({ "n", "o", "v" }, "S", function() hop.hint_words({ direction = directions.BEFORE_CURSOR }) end,
-	{ desc = "Hop Word Before" })
 
-vim.keymap.set({ "n", "o", "v" }, "<leader>ss", function() hop.hint_lines({ multi_windows = true }) end,
+-- Hop leader group
+vim.keymap.set({ "n", "o", "x" }, "<leader>ss", function() hop.hint_lines({ multi_windows = true }) end,
 	{ desc = "Hop Lines Global" })
-vim.keymap.set({ "n", "o", "v" }, "<leader>sd", require('hop-treesitter').hint_nodes, { desc = "Hop Nodes" })
-vim.keymap.set({ "n", "o", "v" }, "<leader>sv", function() hop.hint_vertical({ direction = directions.AFTER_CURSOR }) end,
+vim.keymap.set({ "n", "o", "x" }, "<leader>sd", require('hop-treesitter').hint_nodes, { desc = "Hop Nodes" })
+vim.keymap.set({ "n", "o", "x" }, "<leader>sv", function() hop.hint_vertical({ direction = directions.AFTER_CURSOR }) end,
 	{ desc = "Hop Vertical After" })
-vim.keymap.set({ "n", "o", "v" }, "<leader>sV",
+vim.keymap.set({ "n", "o", "x" }, "<leader>sV",
 	function() hop.hint_vertical({ direction = directions.BEFORE_CURSOR }) end, { desc = "Hop Vertical Before" })
-
+vim.keymap.set({ "n", "o", "x" }, "<leader>sw", function() hop.hint_words({ direction = directions.AFTER_CURSOR }) end,
+	{ desc = "Hop Word After" })
+vim.keymap.set({ "n", "o", "x" }, "<leader>sW", function() hop.hint_words({ direction = directions.BEFORE_CURSOR }) end,
+	{ desc = "Hop Word Before" })
 -- Neotree setup
 vim.keymap.set({ "n" }, "<leader>t", "<cmd>Neotree toggle<CR>", { desc = "Toggle File Tree" })
 

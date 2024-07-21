@@ -54,6 +54,10 @@ vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 vim.api.nvim_set_option_value('updatetime', 10, {})
 
+-- Basics from mini plugins
+require('mini.surround').setup()
+require('mini.pairs').setup()
+
 -- using mason for lsp setup
 require("mason").setup()
 -- mason-lspconfig just to simplify setup of lsp
