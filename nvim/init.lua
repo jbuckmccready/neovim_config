@@ -41,7 +41,7 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 })
---
+
 --Set completeopt to have a better completion experience
 -- :help completeopt
 -- menuone: popup even when there's only one match
@@ -295,12 +295,16 @@ wk.add({
 	{ "<leader>c", "<cmd>tabc<CR>",        desc = "Close Tab",    mode = "n" },
 })
 
+-- Code editing
+wk.add({
+	{ "<leader>e",  group = "Code Editing" },
+	{ "<leader>er", vim.lsp.buf.rename,                      desc = "Rename Symbol", mode = "n" },
+	{ "<leader>ea", require('actions-preview').code_actions, desc = "Code Action",   mode = { "n", "v" } },
+})
 
 -- Misc. LSP
 wk.add({
-	{ "K",    vim.lsp.buf.hover,                       desc = "Hover Text",    mode = "n" },
-	{ "<F2>", vim.lsp.buf.rename,                      desc = "Rename Symbol", mode = "n" },
-	{ "ga",   require('actions-preview').code_actions, desc = "Code Action",   mode = { "n", "v" } },
+	{ "K", vim.lsp.buf.hover, desc = "Hover Text", mode = "n" },
 })
 
 -- Hop setup
@@ -316,6 +320,14 @@ wk.add({
 	-- hop to words
 	{ "s", function() hop.hint_words({ direction = directions.AFTER_CURSOR }) end,                   desc = "Hop Word After",     mode = { "n", "o", "v" } },
 	{ "S", function() hop.hint_words({ direction = directions.BEFORE_CURSOR }) end,                  desc = "Hop Word Before",    mode = { "n", "o", "v" } },
+})
+
+wk.add({
+	{ "<leader>s",  group = "Hop" },
+	{ "<leader>ss", function() hop.hint_lines({ multi_windows = true }) end,                    desc = "Hop Lines Global",    mode = { "n", "o", "v" } },
+	{ "<leader>sd", require('hop-treesitter').hint_nodes,                                       desc = "Hop Nodes",           mode = { "n", "o", "v" } },
+	{ "<leader>sv", function() hop.hint_vertical({ direction = directions.AFTER_CURSOR }) end,  desc = "Hop Vertical After",  mode = { "n", "o", "v" } },
+	{ "<leader>sV", function() hop.hint_vertical({ direction = directions.BEFORE_CURSOR }) end, desc = "Hop Vertical Before", mode = { "n", "o", "v" } },
 })
 
 -- Neotree setup
