@@ -2,6 +2,38 @@ require('config.lazy')
 require('config.patches')
 require('config.keymappings')
 
+-- Basics from mini plugins
+require('mini.basics').setup({
+	mappings = {
+		basic = true,
+		option_toggle_prefix = '\\',
+		windows = true,
+	}
+})
+require('mini.surround').setup()
+require('mini.pairs').setup()
+require('mini.indentscope').setup({
+	draw = {
+		delay = 50,
+		animation = function()
+			return 0
+		end,
+	},
+})
+require('mini.bracketed').setup()
+
+
+-- Global settings
+-- have a fixed column for the diagnostics to appear in
+-- this removes the jitter/shift right when warnings/errors flow in
+vim.wo.signcolumn = "yes"
+-- show line numbers
+vim.wo.number = true
+-- colorscheme
+vim.cmd.colorscheme "catppuccin-mocha"
+-- If nothing typed for this many milliseconds then swap file is written to disk (for crash recovery)
+vim.api.nvim_set_option_value('updatetime', 750, {})
+
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration
 local cmp = require('cmp')
@@ -44,21 +76,6 @@ cmp.setup({
 		documentation = cmp.config.window.bordered(),
 	},
 })
-
---Set completeopt to have a better completion experience
--- :help completeopt
--- menuone: popup even when there's only one match
--- noinsert: Do not insert text until a selection is made
--- noselect: Do not select, force to select one from the menu
--- shortness: avoid showing extra messages when using completion
--- updatetime: set updatetime for CursorHold
-vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
-vim.opt.shortmess = vim.opt.shortmess + { c = true }
-vim.api.nvim_set_option_value('updatetime', 10, {})
-
--- Basics from mini plugins
-require('mini.surround').setup()
-require('mini.pairs').setup()
 
 -- Hookup lsp status before attaching any lsp (to be used in status line)
 local lsp_status = require('lsp-status')
@@ -228,15 +245,3 @@ require("telescope").setup {
 		}
 	}
 }
-
-
-
-
-
--- have a fixed column for the diagnostics to appear in
--- this removes the jitter/shift right when warnings/errors flow in
-vim.wo.signcolumn = "yes"
--- show line numbers
-vim.wo.number = true
--- colorscheme
-vim.cmd.colorscheme "catppuccin-mocha"

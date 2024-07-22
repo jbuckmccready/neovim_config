@@ -38,9 +38,15 @@ miniclue.setup({
 		{ mode = 'n', keys = 'z' },
 		{ mode = 'x', keys = 'z' },
 
-		-- `s` key for surround
+		-- mini.surround
 		{ mode = 'n', keys = 's' },
 		{ mode = 'x', keys = 's' },
+
+		-- mini.bracketed
+		{ mode = 'n', keys = '[' },
+		{ mode = 'x', keys = '[' },
+		{ mode = 'n', keys = ']' },
+		{ mode = 'x', keys = ']' },
 	},
 
 	clues = {
