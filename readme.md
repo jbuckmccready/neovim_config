@@ -11,6 +11,8 @@ Some goals:
 
 This git repository contains both `neovim` and `alacritty` configuration files in the `nvim` and `alacritty` directories respectively. E.g., on MacOS the path will be `~/.config/nvim` and `~/.config/alacritty`, on Windows it will be `~/AppData/Local/nvim` and `~/AppData/Roaming/alacritty` (or maybe different if installed differently).
 
+Note also included is an optional color scheme for `alacritty` as toml file imported into `alacritty.toml`. File path must be changed if path to config is not `~/.config.alacritty`. Check the `alacritty.toml` file for more settings that were tweaked (e.g., to open maximized without window border).
+
 `alacritty` was added just for convenience of getting a terminal running that will work.
 
 ### Things covered
@@ -54,7 +56,7 @@ Use tabs with tuned key mappings: `<leader>n` for new tab, `<leader>c` close tab
 
 Use jump out of terminal mode via usual `<C-w>h`, `<C-w>j`, `<C-w>k`, `<C-w>h` without having to return to normal mode first (makes having split buffer for terminal more convenient). 
 
-Use `fugitive` and `Gitsigns` for git operations and viewing diffs (`<leader>g` to open command group, `<leader>gg` will open main summary/status, `<leader>gd` will diff current file unstaged changes, and more). `:Git` can be used to run git CLI as expected (e.g., `:Git commit`, `:Git push`, etc. using vim buffers where useful).
+Use `fugitive` and `Gitsigns` for git operations and viewing diffs (`<leader>g` to open command group, `<leader>gg` will open main summary/status, `<leader>gd` will diff current file unstaged changes, and more). `:Git` can be used to run git CLI as expected (e.g., `:Git commit`, `:Git push`, etc. using vim buffers where useful). Additionally you can use `telescope` to interact with git status, commits, and stash.
 
 Some additional notes:
 - Cycle auto-completions via `C-n` (or `<down>`) and `C-p` (or `<up>`), `tab` or `<CR>` to complete.
