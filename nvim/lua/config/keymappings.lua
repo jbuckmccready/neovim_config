@@ -158,16 +158,18 @@ vim.keymap.set({ "n", "o", "x" }, "t",
 vim.keymap.set({ "n", "o", "x" }, "T",
 	function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, hint_offset = 1 }) end,
 	{ desc = "Hop 1Char Before-1" })
--- hop to words
 
 -- Hop leader group
+-- global line hop
 vim.keymap.set({ "n", "o", "x" }, "<leader>ss", function() hop.hint_lines({ multi_windows = true }) end,
 	{ desc = "Hop Lines Global" })
 vim.keymap.set({ "n", "o", "x" }, "<leader>sd", require('hop-treesitter').hint_nodes, { desc = "Hop Nodes" })
+-- hop vertical
 vim.keymap.set({ "n", "o", "x" }, "<leader>sv", function() hop.hint_vertical({ direction = directions.AFTER_CURSOR }) end,
 	{ desc = "Hop Vertical After" })
 vim.keymap.set({ "n", "o", "x" }, "<leader>sV",
 	function() hop.hint_vertical({ direction = directions.BEFORE_CURSOR }) end, { desc = "Hop Vertical Before" })
+-- hop to words
 vim.keymap.set({ "n", "o", "x" }, "<leader>sw", function() hop.hint_words({ direction = directions.AFTER_CURSOR }) end,
 	{ desc = "Hop Word After" })
 vim.keymap.set({ "n", "o", "x" }, "<leader>sW", function() hop.hint_words({ direction = directions.BEFORE_CURSOR }) end,
@@ -181,4 +183,5 @@ vim.keymap.set({ "n" }, "<leader>gd", "<cmd>Gdiffsplit<CR>", { desc = "Diff Curr
 vim.keymap.set({ "n" }, "<leader>gs", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Hunk Diff", })
 vim.keymap.set({ "n" }, "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next Hunk", })
 vim.keymap.set({ "n" }, "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous Hunk", })
+vim.keymap.set({ "n" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk", })
 vim.keymap.set({ "n" }, "<leader>gl", "<cmd>Git log --oneline<CR>", { desc = "Commit Log", })
