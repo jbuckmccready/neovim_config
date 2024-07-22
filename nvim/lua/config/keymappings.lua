@@ -38,6 +38,9 @@ miniclue.setup({
 		{ mode = 'n', keys = 'z' },
 		{ mode = 'x', keys = 'z' },
 
+		-- toggles from mini.basics
+		{ mode = 'n', keys = '\\' },
+
 		-- mini.surround
 		{ mode = 'n', keys = 's' },
 		{ mode = 'x', keys = 's' },
@@ -66,9 +69,9 @@ miniclue.setup({
 		{ mode = 'o', keys = '<leader>s',  desc = 'Hop' },
 		{ mode = 'x', keys = '<leader>s',  desc = 'Hop' },
 
-		-- Code Editing
-		{ mode = 'n', keys = '<leader>e',  desc = 'Code Editing' },
-		{ mode = 'x', keys = '<leader>e',  desc = 'Code Editing' },
+		-- Direct Editing
+		{ mode = 'n', keys = '<leader>e',  desc = 'Editing Actions' },
+		{ mode = 'x', keys = '<leader>e',  desc = 'Editing Actions' },
 
 		-- Git
 		{ mode = 'n', keys = '<leader>g',  desc = 'Git' },
@@ -136,9 +139,10 @@ vim.keymap.set({ "n" }, "<leader>5", "<cmd>5tabnext<CR>", { desc = "Tab 5" })
 vim.keymap.set({ "n" }, "<leader>n", "<cmd>tab split<CR>", { desc = "New Tab" })
 vim.keymap.set({ "n" }, "<leader>c", "<cmd>tabc<CR>", { desc = "Close Tab" })
 
--- Code editing
+-- Editing actions
 vim.keymap.set({ "n" }, "<leader>er", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set({ "n", "x" }, "<leader>ea", require('actions-preview').code_actions, { desc = "Code Action" })
+vim.keymap.set({ "n", "x" }, "<leader>es", tele_builtin.spell_suggest, { desc = "Spell Suggest" })
 
 -- Misc. LSP
 vim.keymap.set({ "n" }, "K", vim.lsp.buf.hover, { desc = "Hover Text" })

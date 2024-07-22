@@ -14,7 +14,14 @@ return {
 		'maxmx03/solarized.nvim',
 		lazy = false,
 		priority = 1000,
+		opts = {}
 	},
 	'pappasam/papercolor-theme-slim',
-	{ "ellisonleao/gruvbox.nvim", priority = 1000,     config = true,  opts = {} }
+	{ "ellisonleao/gruvbox.nvim", priority = 1000,     config = true,  opts = {} },
+	{
+		'ribru17/bamboo.nvim',
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	}
 }

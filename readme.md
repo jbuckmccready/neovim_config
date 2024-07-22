@@ -9,7 +9,7 @@ Some goals:
 
 ### Contents
 
-This git repository contains both `neovim` and `alacritty` configuration files in the `nvim` and `alacritty` directories respectively. E.g., on macOS the path will be `~/.config/nvim` and `~/.config/alacritty`, on Windows it will be `~/AppData/Local/nvim` and `~/AppData/Roaming/alacritty` (or maybe different if installed differently).
+This git repository contains both `neovim` and `alacritty` configuration files in the `nvim` and `alacritty` directories respectively. E.g., on MacOS the path will be `~/.config/nvim` and `~/.config/alacritty`, on Windows it will be `~/AppData/Local/nvim` and `~/AppData/Roaming/alacritty` (or maybe different if installed differently).
 
 `alacritty` was added just for convenience of getting a terminal running that will work.
 
@@ -17,14 +17,14 @@ This git repository contains both `neovim` and `alacritty` configuration files i
 
 - rust/go/lua via `mason`/`mason-lsp-config` and `rustaceanvim` (thin wrapper on lsp) for lsp, `treesitter` for syntax highlighting, and `cmp` for auto-completions
 - git via `fugitive` (main git/diff operations) and `gitsigns` (indicators and blame line in editor)
-- navigation via `telescope`, `neotree`, `hop`, and lsp bindings
-- status line via `lualine`
+- navigation via `telescope` (including on lsp symbols/info), `neotree`, `hop`, and `mini.bracketed`
+- status line via `mini.statusline`
 
 ### External tools notes
 
-- you will need `alacritty` or some other decent terminal for real colors if on macOS (default terminal is too limited), I switched to `alacritty` for speed
+- you will need `alacritty` or some other decent terminal for real colors if on MacOS (default terminal is too limited), I switched to `alacritty` for speed
 - nerd font for icons can be downloaded from [here](https://www.nerdfonts.com/font-downloads) (I am currently using ZedMono), then set it in terminal settings (if using `alacritty` see the `alacritty/alacritty.toml` file for example but this is in iTerm2 UI profile settings if using iTerm2 for example)
-- theme is set to `catppuccin-mocha`, so far my favorite dark theme
+- color scheme is set to `catppuccin-mocha`, so far my favorite dark theme, I added some other popular color schemes as well
 - rust analyzer for rust lsp (`rustup component add rust-analyzer` or can probably also install via `mason` plugin)
 - `:LspInstall gopls` for go lsp, `TSInstall go` for go syntax highlighting
 - `:LspInstall lua_ls` for lua lsp, `TSInstall lua` not required currently since it's in `ensure_installed` in `treesitter.lua`
@@ -33,26 +33,31 @@ This git repository contains both `neovim` and `alacritty` configuration files i
 - `fd` for faster file browsing
 - `ripgrep` for telescope live grep
 
+
+### Key mappings
+
+I tried to keep all custom key mappings that are not associated with a plugin mode (anything that works in a standard mode inside a buffer) inside the `nvim/lua/config/keymappings.lua` file. There are other key mappings that are specific to plugin modes, e.g., telescope or autocompletion that are assigned during setup of the plugin. Additionally there are some key mappings added by `mini.basic` that can be found looking at `:h mini.basic`.
+
 ### Workflow
 
-NOTE: `Space` is set as `<leader>` key, so wherever `<leader>` is shown it is `Space` unless you change the leader key (in `lua/config/lazy.lua`). `which-key` plugin is used to help discover key mappings (a popup is shown in UI after first key map is pressed to show following key maps available).
+NOTE: `Space` is set as `<leader>` key, so wherever `<leader>` is shown it is `Space` unless you change the leader key (in `lua/config/lazy.lua`). `mini.clue` plugin is used to help discover key mappings (a popup is shown in UI after first key map is pressed to show following key maps available).
 
-I try to use default key mappings as much as possible (when they are sensible) and anything not mentioned here is likely utilizing default key mappings, I use `<C-w` for window controls, `zz` for center on cursor, etc.
+I try to use default key mappings as much as possible (when they are sensible) and anything not mentioned here is likely utilizing default key mappings, I use `<C-w` for window controls, `zz` for center on cursor, etc. `mini.basics` mappings are added for some additional useful basics, e.g., `<C-h`, `<C-j>`, `<C-k>`, `<C-l>` can be used to jump between windows, `\` followed by `s` to toggle spelling, `b` toggle background, `h` toggle highlight, etc.
 
-Use `neotree` (`<leader>-t`) to toggle open file tree browser, `?` for help, fast search via `/` or `#` inside of it, can be used to change working directory (`.`) for telescope.
+Use `neotree` (`<leader>t`) to toggle open file tree browser, `?` for help, fast search via `/` or `#` inside of it, can be used to change the neovim working directory (`.`) for telescope file finding.
 
-Use `telescope` (`<leader>-f` to access group with commands) to do file search (e.g, `<leader>ff`, equivalent to `<Cmd>p` in `vscode`), buffer search, live grep search using `ripgrep`, and more. One very useful telescope search is to search help/documentation, telescope is also used for LSP navigation/browser, e.g., `<leader>fr` for find all references for symbol under cursor, `<leader>-fd` for all lsp diagnostics (warnings/errors), etc.
+Use `telescope` (`<leader>f` to access group with commands) to do file search (e.g, `<leader>ff`, equivalent to `<Cmd>p` in `vscode`), buffer search, live grep search using `ripgrep`, and more. One very useful telescope search is to search help/documentation, telescope is also used for LSP navigation/browser, e.g., `<leader>fr` for find all references for symbol under cursor, `<leader>fd` for all lsp diagnostics (warnings/errors), etc.
 
-Use `hop` (remapped `f`, `F`, `t`, `T` for single char jump and `<leader>-s` and `<leader>-S` for word jump) for easier buffer navigation.
+Use `hop` (remapped `f`, `F`, `t`, `T` for single char jump and `<leader>s` for more hop commands) for easier buffer navigation.
 
-Use tabs with tuned key mappings: `<leader>-n` for new tab, `<leader>-{number}` to jump to tab number, `<leader>-h` to cycle left one tab, `<leader>-l` to cycle right one tab.
+Use tabs with tuned key mappings: `<leader>n` for new tab, `<leader>c` close tab, `<leader>{number}` to jump to tab number, `<leader>h` to cycle left one tab, `<leader>l` to cycle right one tab.
 
 Use jump out of terminal mode via usual `<C-w>h`, `<C-w>j`, `<C-w>k`, `<C-w>h` without having to return to normal mode first (makes having split buffer for terminal more convenient). 
 
-Use `fugitive` and `Gitsigns` (`<leader>-g` to access group with commands `g?` for help) for git operations and viewing diffs (e.g., `<leader>-gg` will open main summary/status, `<leader>gd` will diff current file unstaged changes). `:Git` can be used to run git CLI as expected (e.g., `:Git commit`, using vim buffers where useful).
+Use `fugitive` and `Gitsigns` for git operations and viewing diffs (`<leader>g` to open command group, `<leader>gg` will open main summary/status, `<leader>gd` will diff current file unstaged changes, and more). `:Git` can be used to run git CLI as expected (e.g., `:Git commit`, `:Git push`, etc. using vim buffers where useful).
 
 Some additional notes:
-- Cycle auto-completions via `C-n` and `C-p`, `tab` or `<CR>` to complete.
-- Code actions: `ga`
+- Cycle auto-completions via `C-n` (or `<down>`) and `C-p` (or `<up>`), `tab` or `<CR>` to complete.
+- Editing actions (symbol rename, lsp code action, spell suggest, etc.): `<leader>e`
+- Use toggle `spell` to turn on spell check, `<leader>e` with cursor over word for spell suggest
 - Hover (for peeking docs on symbol): `K`
-- Rename symbol under cursor: `F2`
