@@ -145,6 +145,8 @@ vim.g.rustaceanvim = {
 					-- nightly rust fmt
 					extraArgs = { '+nightly' },
 				},
+				-- increase limit to 1024 for searching across workspace (defaults to only 128)
+				workspace = { symbol = { search = { limit = 1024 } } }
 			},
 		},
 	},
