@@ -84,6 +84,7 @@ vim.keymap.set({ 'n' }, '<leader>od', function() vim.cmd.RustLsp('openDocs') end
 
 local tele_builtin = require('telescope.builtin')
 vim.keymap.set({ 'n' }, "<leader>ff", tele_builtin.find_files, { desc = "Find File" })
+vim.keymap.set({ 'n' }, "<leader>fF", tele_builtin.oldfiles, { desc = "Previous Files" })
 vim.keymap.set({ 'n' }, "<leader>fg", tele_builtin.live_grep, { desc = "Live Grep" })
 vim.keymap.set({ 'n' }, "<leader>fb", tele_builtin.buffers, { desc = "Find Buffer" })
 vim.keymap.set({ 'n' }, "<leader>fz", tele_builtin.current_buffer_fuzzy_find, { desc = "Buffer Fuzzy Find" })
@@ -98,13 +99,17 @@ vim.keymap.set({ 'n' }, "<leader>f/", tele_builtin.search_history, { desc = "Sea
 vim.keymap.set({ 'n' }, "<leader>ft", tele_builtin.lsp_type_definitions, { desc = "Goto Type Definition(s)" })
 vim.keymap.set({ 'n' }, "<leader>fd", tele_builtin.lsp_definitions, { desc = "Goto Definition(s)" })
 vim.keymap.set({ 'n' }, "<leader>fi", tele_builtin.lsp_implementations, { desc = "Goto Implementation(s)" })
-vim.keymap.set({ 'n' }, "<leader>f\"", tele_builtin.registers, { desc = "Registers" })
+vim.keymap.set({ 'n' }, '<leader>f"', tele_builtin.registers, { desc = "Registers" })
 vim.keymap.set({ 'n' }, "<leader>f'", tele_builtin.marks, { desc = "Marks" })
 vim.keymap.set({ 'n' }, "<leader>fG", tele_builtin.git_branches, { desc = "Git Branches" })
 vim.keymap.set({ 'n' }, "<leader>fc", tele_builtin.git_bcommits, { desc = "Buffer Git Commits" })
 vim.keymap.set({ 'n' }, "<leader>fC", tele_builtin.git_commits, { desc = "Git Commits" })
 vim.keymap.set({ 'n' }, "<leader>fe", tele_builtin.git_status, { desc = "Git Status" })
+vim.keymap.set({ 'n' }, "<leader>fo", tele_builtin.git_stash, { desc = "Git Stash" })
 vim.keymap.set({ 'n' }, "<leader>fl", tele_builtin.colorscheme, { desc = "Color Scheme" })
+vim.keymap.set({ 'n' }, "<leader>fj", tele_builtin.jumplist, { desc = "Vim Jumplist" })
+vim.keymap.set({ 'n' }, "<leader>fk", tele_builtin.keymaps, { desc = "Vim Keymaps" })
+vim.keymap.set({ 'n' }, "<leader>fu", tele_builtin.resume, { desc = "Resume Telescope" })
 
 -- Terminal
 -- Exit terminal mode with ctrl-w hjkl buffer navigation
