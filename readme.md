@@ -27,9 +27,10 @@ Note also included is an optional color scheme for `alacritty` as toml file impo
 - you will need `alacritty` or some other decent terminal for real colors if on MacOS (default terminal is too limited), I switched to `alacritty` for speed
 - nerd font for icons can be downloaded from [here](https://www.nerdfonts.com/font-downloads) (I am currently using ZedMono), then set it in terminal settings (if using `alacritty` see the `alacritty/alacritty.toml` file for example but this is in iTerm2 UI profile settings if using iTerm2 for example)
 - color scheme is set to `catppuccin-mocha`, so far my favorite dark theme, I added some other popular color schemes as well
-- rust analyzer for rust lsp (`rustup component add rust-analyzer` or can probably also install via `mason` plugin)
-- `:LspInstall gopls` for go lsp, `TSInstall go` for go syntax highlighting
+- rust analyzer for rust lsp (`rustup component add rust-analyzer` OR can probably also install via `mason` plugin as well `:LspInstall rust_analyzer`)
+- `:LspInstall gopls` for go lsp, `TSInstall go` for go treesitter (used for syntax highlighting)
 - `:LspInstall lua_ls` for lua lsp, `TSInstall lua` not required currently since it's in `ensure_installed` in `treesitter.lua`
+- `:LspInstall zls` for zig lsp, `TSInstall zig` for zig treesitter (used for syntax highlighting)
 - `cmake` and c compiler for building `telescope-fzf-native.nvim` (greatly speeds up searching in `neotree` and `telescope`)
 - `git` for git things
 - `fd` for faster file browsing

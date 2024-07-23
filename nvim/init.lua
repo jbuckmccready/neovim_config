@@ -131,6 +131,7 @@ require("lspconfig").lua_ls.setup({
 	}
 })
 
+require('lspconfig').zls.setup({})
 
 vim.g.rustaceanvim = {
 	-- Plugin configuration
