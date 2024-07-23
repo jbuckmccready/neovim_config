@@ -80,6 +80,7 @@ miniclue.setup({
 	},
 })
 
+vim.keymap.set('n', ':', '<cmd>FineCmdline<CR>', { noremap = true })
 vim.keymap.set({ 'n' }, '<f1>', function() vim.cmd.RustLsp('openDocs') end, { desc = 'Open Rust Doc' })
 
 local tele_builtin = require('telescope.builtin')
