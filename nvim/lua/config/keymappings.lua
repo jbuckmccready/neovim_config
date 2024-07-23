@@ -146,7 +146,7 @@ vim.keymap.set({ "n" }, "<leader>c", "<cmd>tabc<CR>", { desc = "Close Tab" })
 
 -- Editing actions
 vim.keymap.set({ "n" }, "<leader>er", vim.lsp.buf.rename, { desc = "Rename Symbol" })
-vim.keymap.set({ "n", "x" }, "<leader>ea", require('actions-preview').code_actions, { desc = "Code Action" })
+vim.keymap.set({ "n", "x" }, "<leader>ea", vim.lsp.buf.code_action, { desc = "Code Action" })
 vim.keymap.set({ "n", "x" }, "<leader>es", tele_builtin.spell_suggest, { desc = "Spell Suggest" })
 
 -- Misc. LSP
@@ -183,8 +183,6 @@ vim.keymap.set({ "n", "o", "x" }, "<leader>sw", function() hop.hint_words({ dire
 	{ desc = "Hop Word After" })
 vim.keymap.set({ "n", "o", "x" }, "<leader>sW", function() hop.hint_words({ direction = directions.BEFORE_CURSOR }) end,
 	{ desc = "Hop Word Before" })
--- Neotree setup
-vim.keymap.set({ "n" }, "<leader>t", "<cmd>Neotree toggle<CR>", { desc = "Toggle File Tree" })
 
 -- Git setup
 vim.keymap.set({ "n" }, "<leader>gg", "<cmd>Git<CR>", { desc = "Status", })
@@ -194,6 +192,3 @@ vim.keymap.set({ "n" }, "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", { desc = "N
 vim.keymap.set({ "n" }, "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous Hunk", })
 vim.keymap.set({ "n" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk", })
 vim.keymap.set({ "n" }, "<leader>gl", "<cmd>Git log --oneline<CR>", { desc = "Commit Log", })
-
--- Code/symbols outline
-vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
