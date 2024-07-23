@@ -19,7 +19,7 @@ Note also included is an optional color scheme for `alacritty` as toml file impo
 
 - rust/go/lua via `mason`/`mason-lsp-config` and `rustaceanvim` (thin wrapper on lsp) for lsp, `treesitter` for syntax highlighting, and `cmp` for auto-completions
 - git via `fugitive` (main git/diff operations) and `gitsigns` (indicators and blame line in editor)
-- navigation via `telescope` (including on lsp symbols/info), `neotree`, `hop`, and `mini.bracketed`
+- navigation via `telescope` (including on lsp symbols/info), `neotree`, `outline`, `hop`, and `mini.bracketed`
 - status line via `mini.statusline`
 
 ### External tools notes
@@ -58,8 +58,12 @@ Use jump out of terminal mode via usual `<C-w>h`, `<C-w>j`, `<C-w>k`, `<C-w>h` w
 
 Use `fugitive` and `Gitsigns` for git operations and viewing diffs (`<leader>g` to open command group, `<leader>gg` will open main summary/status, `<leader>gd` will diff current file unstaged changes, and more). `:Git` can be used to run git CLI as expected (e.g., `:Git commit`, `:Git push`, etc. using vim buffers where useful). Additionally you can use `telescope` to interact with git status, commits, and stash.
 
+Use `outline` (`<leader>o`) for code/symbols outline (similar to `neotree` but for symbols in file).
+
 Some additional notes:
 - Cycle auto-completions via `C-n` (or `<down>`) and `C-p` (or `<up>`), `tab` or `<CR>` to complete.
 - Editing actions (symbol rename, lsp code action, spell suggest, etc.): `<leader>e`
 - Use toggle `spell` to turn on spell check, `<leader>e` with cursor over word for spell suggest
-- Hover (for peeking docs on symbol): `K`
+- Hover (for peeking docs on symbol): `K` (press again to toggle into it to jump to symbols from `rust-analyzer`)
+- `<f1>` to open Rust docs link for symbol under cursor
+- `:RustLsp expandMacro` to recursively expand Rust macro under cursor (no key mapping since it's not frequent)
