@@ -80,7 +80,7 @@ miniclue.setup({
 	},
 })
 
-vim.keymap.set({ 'n' }, '<leader>od', function() vim.cmd.RustLsp('openDocs') end, { desc = 'Open Rust Doc' })
+vim.keymap.set({ 'n' }, '<f1>', function() vim.cmd.RustLsp('openDocs') end, { desc = 'Open Rust Doc' })
 
 local tele_builtin = require('telescope.builtin')
 vim.keymap.set({ 'n' }, "<leader>ff", tele_builtin.find_files, { desc = "Find File" })
@@ -194,3 +194,6 @@ vim.keymap.set({ "n" }, "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", { desc = "N
 vim.keymap.set({ "n" }, "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous Hunk", })
 vim.keymap.set({ "n" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk", })
 vim.keymap.set({ "n" }, "<leader>gl", "<cmd>Git log --oneline<CR>", { desc = "Commit Log", })
+
+-- Code/symbols outline
+vim.keymap.set("n", "<leader>o", "<cmd>Outline<CR>", { desc = "Toggle Outline" })
