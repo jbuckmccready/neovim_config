@@ -22,6 +22,10 @@ require('mini.indentscope').setup({
 })
 require('mini.bracketed').setup()
 
+-- NOTE: `guess-indent` plugin will auto match existing file for indent settings so they are left default
+local o = vim.o
+-- smart/auto indent for new lines - seems to give best results but can also be autoindent = true or smartindent = true
+o.cindent = true
 
 -- Global settings
 -- have a fixed column for the diagnostics to appear in
