@@ -20,16 +20,17 @@ Note also included is an optional color scheme for `alacritty` as toml file impo
 - rust/go/lua via `mason`/`mason-lsp-config` and `rustaceanvim` (thin wrapper on lsp) for lsp, `treesitter` for syntax highlighting, and `cmp` for auto-completions
 - git via `fugitive` (main git/diff operations) and `gitsigns` (indicators and blame line in editor)
 - navigation via `telescope` (including on lsp symbols/info), `neotree`, `outline`, `hop`, and `mini.bracketed`
-- status line via `mini.statusline`
+- status line via `lualine`
+- improved notifications and cmdline ui via `noice`, general ui improvements with `dressing` (e.g., for code actions)
 
 ### External tools notes
 
 - you will need `alacritty` or some other decent terminal for real colors if on MacOS (default terminal is too limited), I switched to `alacritty` for speed
 - nerd font for icons can be downloaded from [here](https://www.nerdfonts.com/font-downloads) (I am currently using ZedMono), then set it in terminal settings (if using `alacritty` see the `alacritty/alacritty.toml` file for example but this is in iTerm2 UI profile settings if using iTerm2 for example)
 - color scheme is set to `catppuccin-mocha`, so far my favorite dark theme, I added some other popular color schemes as well
-- rust analyzer for rust lsp (`rustup component add rust-analyzer` OR can probably also install via `mason` plugin as well `:LspInstall rust_analyzer`)
-- `:LspInstall gopls` for go lsp, `TSInstall go` for go treesitter (used for syntax highlighting)
-- `:LspInstall lua_ls` for lua lsp, `TSInstall lua` not required currently since it's in `ensure_installed` in `treesitter.lua`
+- `:TSInstall rust` for best syntactic highlighting and rust analyzer for rust lsp (`rustup component add rust-analyzer` OR can probably also install via `mason` plugin as well `:LspInstall rust_analyzer`)
+- `:LspInstall gopls` for go lsp (using `mason`), `TSInstall go` for go treesitter (used for syntax highlighting)
+- `:LspInstall lua_ls` for lua lsp (using `mason`), `TSInstall lua` not required currently since it's in `ensure_installed` in `treesitter.lua`
 - `:LspInstall zls` for zig lsp, `TSInstall zig` for zig treesitter (used for syntax highlighting)
 - `cmake` and c compiler for building `telescope-fzf-native.nvim` (greatly speeds up searching in `neotree` and `telescope`)
 - `git` for git things
