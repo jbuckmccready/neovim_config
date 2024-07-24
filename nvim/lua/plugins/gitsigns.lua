@@ -5,6 +5,7 @@ return {
 		{ "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>",  mode = "n", desc = "Prev Diff Hunk" },
 		{ "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", mode = "n", desc = "Reset Diff Hunk" },
 	},
+	lazy = false,
 	opts = {
 		current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
 		current_line_blame_opts = {
