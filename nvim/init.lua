@@ -82,8 +82,7 @@ cmp.setup({
 })
 
 -- Hookup lsp status before attaching any lsp (to be used in status line)
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
+require('lsp-status').register_progress()
 
 -- using mason for lsp setup
 require("mason").setup()
@@ -176,43 +175,49 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 vim.lsp.inlay_hint.enable(false)
 
 -- Status line setup
-local status_line = require('mini.statusline')
--- highlight for lsp loading status (change keys to style differently)
-vim.api.nvim_set_hl(0, 'MiniStatuslineLspStatus', { default = true })
-status_line.setup({
-	content = {
-		-- Content for active window
-		active =
-		    function()
-			    local mode, mode_hl     = status_line.section_mode({ trunc_width = 120 })
-			    local git               = status_line.section_git({ trunc_width = 40 })
-			    local diff              = status_line.section_diff({ trunc_width = 75 })
-			    local diagnostics       = status_line.section_diagnostics({ trunc_width = 75 })
-			    local lsp               = status_line.section_lsp({ trunc_width = 75 })
-			    local filename          = status_line.section_filename({ trunc_width = 140 })
-			    local fileinfo          = status_line.section_fileinfo({ trunc_width = 120 })
-			    local location          = status_line.section_location({ trunc_width = 75 })
-			    local search            = status_line.section_searchcount({ trunc_width = 75 })
-
-			    local lsp_status_string = lsp_status.status()
-
-			    return status_line.combine_groups({
-				    { hl = mode_hl,                 strings = { mode } },
-				    { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
-				    '%<', -- Mark general truncate point
-				    { hl = 'MiniStatuslineFilename',  strings = { filename } },
-				    '%=', -- End left alignment
-				    { hl = 'MiniStatuslineLspStatus', strings = { lsp_status_string } },
-				    { hl = 'MiniStatuslineFileinfo',  strings = { fileinfo } },
-				    { hl = mode_hl,                   strings = { search, location } },
-			    })
-		    end,
-		-- Content for inactive window(s)
-		inactive = nil,
+require('lualine').setup {
+	options = {
+		icons_enabled = true,
+		theme = 'auto',
+		component_separators = '|',
+		section_separators = '',
+		disabled_filetypes = {
+			statusline = {},
+			winbar = {},
+		},
+		ignore_focus = {},
+		always_divide_middle = true,
+		globalstatus = false,
+		refresh = {
+			statusline = 1000,
+			tabline = 1000,
+			winbar = 1000,
+		}
 	},
-	use_icons = true,
-	set_vim_settings = true,
-})
+	sections = {
+		lualine_a = { 'mode' },
+		lualine_b = { 'branch', 'diff', 'diagnostics' },
+		-- path = 2 for absolute file path
+		lualine_c = { { 'filename', path = 2 } },
+		lualine_x = { 'require("lsp-status").status()', 'encoding', 'fileformat', 'filetype' },
+		lualine_y = { 'progress' },
+		lualine_z = { 'location' }
+	},
+	inactive_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = { 'filename' },
+		lualine_d = {},
+		lualine_x = { 'location' },
+		lualine_y = {},
+		lualine_z = {}
+	},
+	tabline = {},
+	winbar = {},
+	inactive_winbar = {},
+	extensions = {}
+}
+
 
 -- Telescope
 -- Telescope fzf extension for performance on fuzzy searching
