@@ -142,7 +142,7 @@ vim.keymap.set({ "n" }, "<leader>3", "<cmd>3tabnext<CR>", { desc = "Tab 3" })
 vim.keymap.set({ "n" }, "<leader>4", "<cmd>4tabnext<CR>", { desc = "Tab 4" })
 vim.keymap.set({ "n" }, "<leader>5", "<cmd>5tabnext<CR>", { desc = "Tab 5" })
 vim.keymap.set({ "n" }, "<leader>n", "<cmd>tab split<CR>", { desc = "New Tab" })
-vim.keymap.set({ "n" }, "<leader>c", "<cmd>tabc<CR>", { desc = "Close Tab" })
+vim.keymap.set({ "n" }, "<leader>q", "<cmd>tabc<CR>", { desc = "Close Tab" })
 
 -- Editing actions
 vim.keymap.set({ "n" }, "<leader>er", vim.lsp.buf.rename, { desc = "Rename Symbol" })
@@ -183,12 +183,3 @@ vim.keymap.set({ "n", "o", "x" }, "<leader>sw", function() hop.hint_words({ dire
 	{ desc = "Hop Word After" })
 vim.keymap.set({ "n", "o", "x" }, "<leader>sW", function() hop.hint_words({ direction = directions.BEFORE_CURSOR }) end,
 	{ desc = "Hop Word Before" })
-
--- Git setup
-vim.keymap.set({ "n" }, "<leader>gg", "<cmd>Git<CR>", { desc = "Status", })
-vim.keymap.set({ "n" }, "<leader>gd", "<cmd>Gdiffsplit<CR>", { desc = "Diff Current File", })
-vim.keymap.set({ "n" }, "<leader>gs", "<cmd>Gitsigns preview_hunk<CR>", { desc = "Hunk Diff", })
-vim.keymap.set({ "n" }, "<leader>gn", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next Hunk", })
-vim.keymap.set({ "n" }, "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous Hunk", })
-vim.keymap.set({ "n" }, "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", { desc = "Reset Hunk", })
-vim.keymap.set({ "n" }, "<leader>gl", "<cmd>Git log --oneline<CR>", { desc = "Commit Log", })

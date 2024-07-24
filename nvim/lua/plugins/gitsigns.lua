@@ -1,5 +1,10 @@
 return {
 	'lewis6991/gitsigns.nvim',
+	keys = {
+		{ "<leader>gn", "<cmd>Gitsigns next_hunk<CR>",  mode = "n", desc = "Next Diff Hunk" },
+		{ "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>",  mode = "n", desc = "Prev Diff Hunk" },
+		{ "<leader>gr", "<cmd>Gitsigns reset_hunk<CR>", mode = "n", desc = "Reset Diff Hunk" },
+	},
 	opts = {
 		current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
 		current_line_blame_opts = {
