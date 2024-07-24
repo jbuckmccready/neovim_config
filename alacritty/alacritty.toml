@@ -1,5 +1,7 @@
 live_config_reload = true
 
+# theme example, commented out as it changes cursor color in vim as well
+# which makes it too light for use with light color scheme
 import = [
   "~/.config/alacritty/catppuccin-mocha.toml"
 ]
