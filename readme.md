@@ -54,7 +54,7 @@ Use `telescope` (`<leader>f` to access group with commands) to do file search (e
 
 Use `hop` (remapped `f`, `F`, `t`, `T` for single char jump and `<leader>s` for more hop commands) for easier buffer navigation.
 
-Use tabs with tuned key mappings: `<leader>n` for new tab, `<leader>c` close tab, `<leader>{number}` to jump to tab number, `<leader>h` to cycle left one tab, `<leader>l` to cycle right one tab.
+Use tabs with tuned key mappings: `<leader>n` for new tab, `<leader>q` close tab, `<leader>{number}` to jump to tab number, `<leader>h` to cycle left one tab, `<leader>l` to cycle right one tab.
 
 Use jump out of terminal mode via usual `<C-w>h`, `<C-w>j`, `<C-w>k`, `<C-w>h` without having to return to normal mode first (makes having split buffer for terminal more convenient). 
 
