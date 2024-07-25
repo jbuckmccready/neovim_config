@@ -21,6 +21,7 @@ require('mini.indentscope').setup({
 	},
 })
 require('mini.bracketed').setup()
+require('mini.ai').setup()
 
 -- NOTE: `guess-indent` plugin will auto match existing file for indent settings so they are left default
 local o = vim.o

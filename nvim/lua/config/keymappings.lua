@@ -50,6 +50,13 @@ miniclue.setup({
 		{ mode = 'x', keys = '[' },
 		{ mode = 'n', keys = ']' },
 		{ mode = 'x', keys = ']' },
+
+		-- text ojects
+		{ mode = 'o', keys = 'i' },
+		{ mode = 'x', keys = 'i' },
+		{ mode = 'o', keys = 'a' },
+		{ mode = 'x', keys = 'a' },
+
 	},
 
 	clues = {
