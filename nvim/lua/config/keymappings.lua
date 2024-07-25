@@ -91,7 +91,7 @@ miniclue.setup({
 vim.keymap.set({ 'c' }, '<Up>', "<C-p>", { desc = 'Select previous' })
 vim.keymap.set({ 'c' }, '<Down>', "<C-n>", { desc = 'Select next' })
 
-vim.keymap.set({ 'n' }, '<f1>', function() vim.cmd.RustLsp('openDocs') end, { desc = 'Open Rust Doc' })
+vim.keymap.set({ 'n' }, '<leader><f1>', function() vim.cmd.RustLsp('openDocs') end, { desc = 'Open Rust Doc' })
 
 local tele_builtin = require('telescope.builtin')
 vim.keymap.set({ 'n' }, "<leader>ff", tele_builtin.find_files, { desc = "Find File" })

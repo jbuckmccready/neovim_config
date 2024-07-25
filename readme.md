@@ -65,7 +65,7 @@ Use `outline` (`<leader>o`) for code/symbols outline (similar to `neotree` but f
 Some additional notes:
 - Cycle auto-completions via `C-n` (or `<down>`) and `C-p` (or `<up>`), `tab` or `<CR>` to complete.
 - Editing actions (symbol rename, lsp code action, spell suggest, etc.): `<leader>e`
-- Use toggle `spell` to turn on spell check, `<leader>e` with cursor over word for spell suggest
+- Toggle `spell` with `\s` to turn on/off spell check, `<leader>es` with cursor over word for spell suggest
 - Hover (for peeking docs on symbol): `K` (press again to toggle into it to jump to symbols from `rust-analyzer`)
-- `<f1>` to open Rust docs link for symbol under cursor
+- `<leader><f1>` to open Rust docs link for symbol under cursor
 - `:RustLsp expandMacro` to recursively expand Rust macro under cursor (no key mapping since it's not frequent)
