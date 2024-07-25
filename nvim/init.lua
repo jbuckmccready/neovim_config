@@ -80,6 +80,23 @@ cmp.setup({
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
 	},
+	formatting = {
+		-- Formatting function to limit width
+		format = function(_, vim_item)
+			local ELLIPSIS_CHAR = '…'
+			local MAX_LABEL_WIDTH = 100
+			local MIN_LABEL_WIDTH = 20
+			local label = vim_item.abbr
+			local truncated_label = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
+			if truncated_label ~= label then
+				vim_item.abbr = truncated_label .. ELLIPSIS_CHAR
+			elseif string.len(label) < MIN_LABEL_WIDTH then
+				local padding = string.rep(' ', MIN_LABEL_WIDTH - string.len(label))
+				vim_item.abbr = label .. padding
+			end
+			return vim_item
+		end,
+	},
 })
 
 -- Hookup lsp status before attaching any lsp (to be used in status line)
