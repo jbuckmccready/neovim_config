@@ -68,6 +68,13 @@ cmp.setup({
 		}),
 	},
 
+	sorting = {
+		-- Sorting priority according to order of sources (prioritizes lsp)
+		comparators = {
+			cmp.config.compare.order,
+		},
+	},
+
 	-- Installed sources
 	sources = {
 		{ name = "nvim_lsp" },
