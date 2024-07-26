@@ -2,6 +2,8 @@ require('config.lazy')
 require('config.patches')
 require('config.keymappings')
 
+local settings = require('config.settings')
+
 -- Basics from mini plugins
 require('mini.basics').setup({
 	mappings = {
@@ -35,7 +37,8 @@ vim.wo.signcolumn = "yes"
 -- show line numbers
 vim.wo.number = true
 -- colorscheme
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme(settings.colorscheme)
+vim.o.background = settings.background
 -- If nothing typed for this many milliseconds then swap file is written to disk (for crash recovery)
 vim.api.nvim_set_option_value('updatetime', 750, {})
 
@@ -172,7 +175,7 @@ vim.g.rustaceanvim = {
 			['rust-analyzer'] = {
 				rustfmt = {
 					-- nightly rust fmt
-					extraArgs = { '+nightly' },
+					extraArgs = { settings.rustfmt_extra_args },
 				},
 				-- increase limit to 1024 for searching across workspace (defaults to only 128)
 				workspace = { symbol = { search = { limit = 1024 } } }
