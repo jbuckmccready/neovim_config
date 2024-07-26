@@ -184,16 +184,17 @@ vim.g.rustaceanvim = {
 	},
 }
 
--- lsp format on save
-vim.api.nvim_create_autocmd('BufWritePre', {
-	group = au_group,
-	buffer = bufnr,
-	callback = function()
-		vim.lsp.buf.format({
-			timeout_ms = 2000,
-			async = false,
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("lsp", { clear = true }),
+	callback = function(args)
+		-- lsp format on save
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = args.buf,
+			callback = function()
+				vim.lsp.buf.format { async = false, id = args.data.client_id }
+			end,
 		})
-	end,
+	end
 })
 
 -- Turn on/off lsp inlay hints

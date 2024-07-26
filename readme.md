@@ -18,10 +18,10 @@ Note also included is an optional color scheme for `alacritty` as toml file impo
 ### Things covered
 
 - rust/go/lua via `mason`/`mason-lsp-config` and `rustaceanvim` (thin wrapper on lsp) for lsp, `treesitter` for syntax highlighting, and `cmp` for auto-completions
-- git via `fugitive` (main git/diff operations) and `gitsigns` (indicators and blame line in editor)
+- git via `neogit` (main git/diff operations) and `gitsigns` (indicators and blame line in editor)
 - navigation via `telescope` (including on lsp symbols/info), `neotree`, `outline`, `hop`, and `mini.bracketed`
 - status line via `lualine`
-- improved notifications and cmdline ui via `noice`, general ui improvements with `dressing` (e.g., for code actions)
+- general ui improvements with `dressing` (e.g., for code actions)
 
 ### External tools notes
 
@@ -58,7 +58,7 @@ Use tabs with tuned key mappings: `<leader>n` for new tab, `<leader>q` close tab
 
 Use jump out of terminal mode via usual `<C-w>h`, `<C-w>j`, `<C-w>k`, `<C-w>h` without having to return to normal mode first (makes having split buffer for terminal more convenient). 
 
-Use `fugitive` and `Gitsigns` for git operations and viewing diffs (`<leader>g` to open command group, `<leader>gg` will open main summary/status, `<leader>gd` will diff current file unstaged changes, and more). `:Git` can be used to run git CLI as expected (e.g., `:Git commit`, `:Git push`, etc. using vim buffers where useful). Additionally you can use `telescope` to interact with git status, commits, and stash.
+Use `neogit` and `Gitsigns` for git operations and viewing diffs (`<leader>g` to open command group, `<leader>gg` will open main summary/status, `<leader>gd` will diff current file unstaged changes, and more). From main `neogit` status (`<leader>gg`) you can commit, pull, push, etc., use `?` to get full keymappings. Additionally you can use `telescope` to interact with git status, commits, and stash.
 
 Use `outline` (`<leader>o`) for code/symbols outline (similar to `neotree` but for symbols in file).
 
