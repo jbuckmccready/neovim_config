@@ -87,6 +87,10 @@ miniclue.setup({
 	},
 })
 
+-- Unmap 's' as I never use it and it overlaps with surround plugin key maps causing a delayed command
+vim.keymap.set({ 'n', 'x' }, "s", "<Nop>", { silent = true })
+
+
 -- Map up/down arrow for autocompletion selection in command mode
 vim.keymap.set({ 'c' }, '<Up>', "<C-p>", { desc = 'Select previous' })
 vim.keymap.set({ 'c' }, '<Down>', "<C-n>", { desc = 'Select next' })
