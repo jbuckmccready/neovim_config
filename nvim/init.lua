@@ -175,7 +175,7 @@ vim.g.rustaceanvim = {
 			['rust-analyzer'] = {
 				rustfmt = {
 					-- nightly rust fmt
-					extraArgs = { settings.rustfmt_extra_args },
+					extraArgs = { settings.rust_fmt_extra_args },
 				},
 				-- increase limit to 1024 for searching across workspace (defaults to only 128)
 				workspace = { symbol = { search = { limit = 1024 } } }
