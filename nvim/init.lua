@@ -200,7 +200,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end
 })
 
--- Turn on/off lsp inlay hints
+-- Turn off lsp inlay hints by default
 vim.lsp.inlay_hint.enable(false)
 
 -- Status line setup

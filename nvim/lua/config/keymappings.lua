@@ -90,6 +90,8 @@ miniclue.setup({
 -- Unmap 's' as I never use it and it overlaps with surround plugin key maps causing a delayed command
 vim.keymap.set({ 'n', 'x' }, "s", "<Nop>", { silent = true })
 
+-- LSP inlay hint toggle
+vim.keymap.set({ 'n' }, '\\H', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = 'Toggle lsp inlay hints' })
 
 -- Map up/down arrow for autocompletion selection in command mode
 vim.keymap.set({ 'c' }, '<Up>', "<C-p>", { desc = 'Select previous' })
