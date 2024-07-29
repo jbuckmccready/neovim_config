@@ -1,10 +1,13 @@
 return {
-	{ "catppuccin/nvim",          name = "catppuccin", priority = 1000 },
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		-- opts = {}
+	},
 	{
 		"folke/tokyonight.nvim",
-		lazy = false,
 		priority = 1000,
-		opts = {},
 	},
 	'navarasu/onedark.nvim',
 	'Shatur/neovim-ayu',
@@ -12,16 +15,15 @@ return {
 	'sainnhe/sonokai',
 	{
 		'maxmx03/solarized.nvim',
-		lazy = false,
 		priority = 1000,
-		opts = {}
 	},
 	'pappasam/papercolor-theme-slim',
-	{ "ellisonleao/gruvbox.nvim", priority = 1000,     config = true,  opts = {} },
+	{
+		"ellisonleao/gruvbox.nvim",
+		priority = 1000,
+	},
 	{
 		'ribru17/bamboo.nvim',
-		lazy = false,
 		priority = 1000,
-		opts = {},
 	}
 }
