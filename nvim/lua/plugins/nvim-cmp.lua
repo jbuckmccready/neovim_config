@@ -8,9 +8,14 @@ return {
 		-- cmp Path completion
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-buffer",
+		"zjp-CN/nvim-cmp-lsp-rs",
 	},
 	config = function()
 		local cmp = require('cmp')
+		local cmp_compare = require("cmp").config.compare
+		-- using comparators from this plugin to improve rust autocomplete ordering
+		local cmp_rs_compare = require("cmp_lsp_rs").comparators
+
 		cmp.setup({
 			preselect = cmp.PreselectMode.None,
 			snippet = {
@@ -38,9 +43,11 @@ return {
 			},
 
 			sorting = {
-				-- Sorting priority according to order of sources (prioritizes lsp)
 				comparators = {
-					cmp.config.compare.order,
+					cmp_compare.exact,
+					cmp_compare.score,
+					cmp_rs_compare.inscope_inherent_import,
+					cmp_rs_compare.sort_by_label_but_underscore_last,
 				},
 			},
 

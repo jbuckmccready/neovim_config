@@ -29,6 +29,8 @@ require('mini.ai').setup()
 local o = vim.o
 -- smart/auto indent for new lines - seems to give best results but can also be autoindent = true or smartindent = true
 o.cindent = true
+-- Keep popup menus from being too tall (limit to 30 items)
+o.pumheight = 30
 
 -- Global settings
 -- have a fixed column for the diagnostics to appear in

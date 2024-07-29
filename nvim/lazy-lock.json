@@ -27,6 +27,7 @@
   "neovim-ayu": { "branch": "master", "commit": "6993189dd0ee38299879a1a0064718a8392e8713" },
   "nui.nvim": { "branch": "main", "commit": "61574ce6e60c815b0a0c4b5655b8486ba58089a1" },
   "nvim-cmp": { "branch": "main", "commit": "d818fd0624205b34e14888358037fb6f5dc51234" },
+  "nvim-cmp-lsp-rs": { "branch": "main", "commit": "d9ebeca9ea07ba2fd57f997b2d6a8bc7da51abed" },
   "nvim-lspconfig": { "branch": "master", "commit": "f95d371c1a274f60392edfd8ea5121b42dca736e" },
   "nvim-treesitter": { "branch": "master", "commit": "2d5133f67429f82547ea5fad33a0b1e7d4f78a1c" },
   "nvim-ufo": { "branch": "main", "commit": "1b5f2838099f283857729e820cc05e2b19df7a2c" },
