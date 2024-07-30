@@ -91,7 +91,7 @@ miniclue.setup({
 vim.keymap.set({ 'n', 'x' }, "s", "<Nop>", { silent = true })
 
 -- LSP inlay hint toggle
-vim.keymap.set({ 'n' }, '\\H', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end,
+vim.keymap.set({ 'n' }, '\\z', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({})) end,
 	{ desc = 'Toggle lsp inlay hints' })
 
 -- Map up/down arrow for autocompletion selection in command mode
