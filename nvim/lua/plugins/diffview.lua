@@ -6,6 +6,15 @@ return {
 		{ "<leader>gD", "<cmd>DiffviewOpen -uno<CR>",   mode = "n", desc = "Diff View Only Tracked" },
 		{ "<leader>gf", "<cmd>DiffviewFileHistory<CR>", mode = "n", desc = "Diff View File History" },
 	},
+	cmd = {
+		"DiffviewClose",
+		"DiffviewFileHistory",
+		"DiffviewFocusFiles",
+		"DiffviewLog",
+		"DiffviewOpen",
+		"DiffviewRefresh",
+		"DiffviewToggleLines",
+	},
 	config = function()
 		require("diffview").setup()
 	end
