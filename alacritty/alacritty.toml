@@ -6,6 +6,10 @@ import = [
   "~/.config/alacritty/catppuccin-mocha.toml"
 ]
 
+# needed for colors to work right in tmux
+[env]
+TERM = "xterm-256color"
+
 [window]
 decorations = "None"
 startup_mode = "Maximized"
