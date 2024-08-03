@@ -8,8 +8,15 @@ return {
 		-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	keys = {
-		-- lazy load when toggled
-		{ "<leader>t", "<cmd>Neotree toggle<CR>", mode = "n", desc = "Toggle File Tree" },
+		{
+			"<leader>t",
+			"<cmd>Neotree toggle reveal_force_cwd<CR>",
+			mode = "n",
+			desc = "Toggle File Tree"
+		},
+	},
+	cmd = {
+		"Neotree",
 	},
 	config = function()
 		require("neo-tree").setup({
