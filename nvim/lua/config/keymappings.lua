@@ -110,7 +110,9 @@ vim.keymap.set({ 'n' }, '<leader><f1>', function() vim.cmd.RustLsp('openDocs') e
 vim.cmd("autocmd User TelescopePreviewerLoaded setlocal number")
 
 local tele_builtin = require('telescope.builtin')
-vim.keymap.set({ 'n' }, "<leader>ff", tele_builtin.find_files, { desc = "Find File" })
+vim.keymap.set({ 'n' }, "<leader>ff",
+	function() require 'telescope.builtin'.find_files({ find_command = { 'rg', '--files', '--hidden', '-g', '!.git' } }) end,
+	{ desc = "Find File" })
 vim.keymap.set({ 'n' }, "<leader>fF", tele_builtin.oldfiles, { desc = "Previous Files" })
 vim.keymap.set({ 'n' }, "<leader>fg", tele_builtin.live_grep, { desc = "Live Grep" })
 vim.keymap.set({ 'n' }, "<leader>fb", tele_builtin.buffers, { desc = "Find Buffer" })
