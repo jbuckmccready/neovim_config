@@ -53,7 +53,7 @@ return {
 			-- Installed sources
 			sources = {
 				{ name = "nvim_lsp" },
-				{ name = "luasnip" },
+				{ name = "luasnip", keyword_length = 2 },
 				{ name = "path" },
 				{ name = "buffer",  keyword_length = 3, max_item_count = 10 },
 			},
