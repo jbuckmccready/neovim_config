@@ -4,7 +4,7 @@ return {
 	config = function()
 		require('nvim-autopairs').setup({
 			fast_wrap = {
-				map = '<C-Space>',
+				map = '<C-m>',
 				chars = { '{', '[', '(', '"', "'" },
 				pattern = [=[[%'%"%>%]%)%}%,]]=],
 				end_key = '$',

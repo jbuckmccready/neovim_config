@@ -177,7 +177,7 @@ vim.keymap.set({ "n" }, "<leader>q", "<cmd>tabc<CR>", { desc = "Close Tab" })
 vim.keymap.set({ "n" }, "<leader>er", vim.lsp.buf.rename, { desc = "Rename Symbol" })
 vim.keymap.set({ "n", "x" }, "<leader>ea", vim.lsp.buf.code_action, { desc = "Code Action" })
 vim.keymap.set({ "n", "x" }, "<leader>es", tele_builtin.spell_suggest, { desc = "Spell Suggest" })
-vim.keymap.set({ "n", "i" }, "<C-.>", vim.lsp.buf.code_action, { desc = "Code Action" })
+vim.keymap.set({ "n", "i" }, "<C-Space>", vim.lsp.buf.code_action, { desc = "Code Action" })
 
 -- Misc. LSP
 vim.keymap.set({ "n" }, "K", vim.lsp.buf.hover, { desc = "Hover Text" })
